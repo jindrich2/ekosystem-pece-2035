@@ -1,0 +1,1480 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Udržitelný ekosystém péče 2035: mapa kritických bariér a rizik neformální péče v Česku a šest designových výzev k roku 2035.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ekosystém péče 2035</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: poster system A (Řádky) on the web — mono meta row, blue band headers, one row per topic: label + headline left, content right */
+:root {
+  --paper: #f9f9f7;
+  --ink: #111318;
+  --ink-2: #4a505c;
+  --blue: #1f4dff;
+  --blue-soft: #7b93ff;
+  --blue-wash: #e6eaff;
+  --grey: #aab2bf;
+  --line: #e1e3e8;
+  --axis: #c3c7cf;
+  --ink-3: #868c97;
+  --blue-light: #9fb3ff;
+  --shade: #e9ebef;
+  --white: #ffffff;
+  --sky: #e4ebff;
+  --sky-line: #c5d1f7;
+  --card: #fbfbfa;
+  --on-blue: #ffffff;
+  /* Pillar accents (CARE 2035 design system): accent = fills, accent-ink = text & thin lines, on-accent = text on fills.
+     Default = A · Demografie blue; pages set data-pillar on <main>, overview blocks set it per item. */
+  --accent: #1f4dff;
+  --accent-ink: #1f4dff;
+  --accent-light: #9fb3ff;
+  --accent-wash: rgba(31, 77, 255, 0.10);
+  --on-accent: #ffffff;
+  --tint: #e4ebff;
+  --tint-line: #c5d1f7;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 48px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1115; --ink: #eef0f4; --ink-2: #a7aebb; --blue: #5b7bff; --blue-soft: #8fa3ff;
+    --blue-wash: #1a2140; --grey: #5d6573; --line: #262b34; --axis: #3a414d; --ink-3: #7d8594; --blue-light: #3d53a8; --accent: #5b7bff; --accent-ink: #8fa3ff; --accent-light: #3d53a8; --accent-wash: rgba(91, 123, 255, 0.16); --on-accent: #ffffff; --tint: #121a33; --tint-line: #26345e; --shade: #181b21; --card: #0f1115; --white: #08090b; --sky: #121a33; --sky-line: #26345e; --on-blue: #ffffff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1115; --ink: #eef0f4; --ink-2: #a7aebb; --blue: #5b7bff; --blue-soft: #8fa3ff;
+  --blue-wash: #1a2140; --grey: #5d6573; --line: #262b34; --axis: #3a414d; --ink-3: #7d8594; --blue-light: #3d53a8; --accent: #5b7bff; --accent-ink: #8fa3ff; --accent-light: #3d53a8; --accent-wash: rgba(91, 123, 255, 0.16); --on-accent: #ffffff; --tint: #121a33; --tint-line: #26345e; --shade: #181b21; --card: #0f1115; --white: #08090b; --sky: #121a33; --sky-line: #26345e; --on-blue: #ffffff; color-scheme: dark;
+}
+/* Pillar themes */
+[data-pillar="demografie"] { --accent: #1f4dff; --accent-ink: #1f4dff; --accent-light: #9fb3ff; --accent-wash: rgba(31, 77, 255, 0.10); --on-accent: #ffffff; --tint: #e4ebff; --tint-line: #c5d1f7; }
+[data-pillar="pecujici"] { --accent: #db5461; --accent-ink: #b14550; --accent-light: #ecafb4; --accent-wash: rgba(219, 84, 97, 0.12); --on-accent: #0b0b0b; --tint: #fbe8ea; --tint-line: #f0c4c8; }
+[data-pillar="finance"] { --accent: #6bd425; --accent-ink: #3b7018; --accent-light: #b9e899; --accent-wash: rgba(107, 212, 37, 0.16); --on-accent: #0b0b0b; --tint: #eaf7df; --tint-line: #c8e9ad; }
+[data-pillar="obce"] { --accent: #3ab795; --accent-ink: #27725e; --accent-light: #a3dbcb; --accent-wash: rgba(58, 183, 149, 0.14); --on-accent: #0b0b0b; --tint: #e1f3ed; --tint-line: #b5e0d3; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-pillar="pecujici"] { --accent: #db5461; --accent-ink: #f08a94; --accent-light: #7a3038; --accent-wash: rgba(219, 84, 97, 0.18); --on-accent: #0b0b0b; --tint: #2a1518; --tint-line: #4d262b; }
+  :root:not([data-theme="light"]) [data-pillar="finance"] { --accent: #6bd425; --accent-ink: #96e45f; --accent-light: #3b6a1d; --accent-wash: rgba(107, 212, 37, 0.18); --on-accent: #0b0b0b; --tint: #18240f; --tint-line: #2f4a1c; }
+  :root:not([data-theme="light"]) [data-pillar="obce"] { --accent: #3ab795; --accent-ink: #6fd6b9; --accent-light: #1f6653; --accent-wash: rgba(58, 183, 149, 0.18); --on-accent: #0b0b0b; --tint: #0f2620; --tint-line: #1d4a3e; }
+  :root:not([data-theme="light"]) [data-pillar="demografie"] { --accent: #5b7bff; --accent-ink: #8fa3ff; --accent-light: #3d53a8; --accent-wash: rgba(91, 123, 255, 0.16); --on-accent: #ffffff; --tint: #121a33; --tint-line: #26345e; }
+}
+:root[data-theme="dark"] [data-pillar="pecujici"] { --accent: #db5461; --accent-ink: #f08a94; --accent-light: #7a3038; --accent-wash: rgba(219, 84, 97, 0.18); --on-accent: #0b0b0b; --tint: #2a1518; --tint-line: #4d262b; }
+:root[data-theme="dark"] [data-pillar="finance"] { --accent: #6bd425; --accent-ink: #96e45f; --accent-light: #3b6a1d; --accent-wash: rgba(107, 212, 37, 0.18); --on-accent: #0b0b0b; --tint: #18240f; --tint-line: #2f4a1c; }
+:root[data-theme="dark"] [data-pillar="obce"] { --accent: #3ab795; --accent-ink: #6fd6b9; --accent-light: #1f6653; --accent-wash: rgba(58, 183, 149, 0.18); --on-accent: #0b0b0b; --tint: #0f2620; --tint-line: #1d4a3e; }
+:root[data-theme="dark"] [data-pillar="demografie"] { --accent: #5b7bff; --accent-ink: #8fa3ff; --accent-light: #3d53a8; --accent-wash: rgba(91, 123, 255, 0.16); --on-accent: #ffffff; --tint: #121a33; --tint-line: #26345e; }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.brand { text-decoration: none; display: flex; align-items: baseline; gap: 10px; }
+.brand b { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { color: var(--accent-ink); font-weight: 700; font-family: var(--display); font-size: 18px; }
+.nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav a { text-decoration: none; font-size: 15px; font-weight: 500; padding: 6px 12px; border-radius: 999px; color: var(--ink-2); }
+.nav a:hover { color: var(--ink); background: var(--accent-wash); }
+.nav a[aria-current="true"] { color: var(--on-accent); background: var(--accent); }
+.meta { padding-block: 22px 0; color: var(--ink-2); }
+
+/* Blue band (poster header) */
+.band { background: var(--accent); color: var(--on-accent); margin-top: 22px; }
+.band .wrap { padding-block: clamp(28px, 5vw, 56px); display: grid; gap: 10px; }
+.band .kicker { font-size: clamp(16px, 1.8vw, 21px); font-weight: 500; opacity: 0.92; }
+.band h1 { font-size: clamp(34px, 5.6vw, 72px); font-weight: 700; }
+.band .lede { max-width: 62ch; font-size: clamp(17px, 1.6vw, 20px); opacity: 0.92; margin-top: 8px; }
+.crumb { color: var(--on-accent); opacity: 0.85; text-decoration: none; }
+.crumb:hover { opacity: 1; text-decoration: underline; }
+
+/* Rows */
+main { padding-bottom: 72px; }
+.row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); padding-block: clamp(28px, 4vw, 48px); border-top: 1px solid var(--ink); }
+.row:first-child { border-top: 0; }
+.row > * { min-width: 0; }
+.row .label { color: var(--ink-2); margin-bottom: 14px; }
+.row h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 600; }
+.big { font-family: var(--display); font-weight: 700; color: var(--accent-ink); font-size: clamp(56px, 8vw, 104px); line-height: 0.95; letter-spacing: -0.04em; margin-top: 22px; }
+.big-cap { color: var(--ink-2); font-size: 15px; margin-top: 8px; max-width: 34ch; }
+.prose { display: grid; gap: 14px; max-width: 66ch; }
+.prose p { color: var(--ink); }
+ul.facts { list-style: none; padding: 0; margin: 0; display: grid; }
+ul.facts li { padding-block: 14px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 10px 1fr; gap: 14px; }
+ul.facts li:first-child { border-top: 0; padding-top: 0; }
+ul.facts li::before { content: ""; width: 8px; height: 8px; background: var(--accent); margin-top: 9px; }
+ul.facts strong { font-weight: 600; }
+
+/* Stat strip */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.stat { padding: 26px 20px 26px 0; display: grid; gap: 8px; align-content: start; }
+.stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+.stat b { font-family: var(--display); font-size: clamp(34px, 4vw, 52px); letter-spacing: -0.03em; line-height: 1; color: var(--accent-ink); font-weight: 700; }
+.stat span { font-size: 15px; color: var(--ink-2); }
+
+/* Index lists (barriers / challenges) */
+.index { display: grid; }
+.index a { display: grid; grid-template-columns: 56px minmax(0, 1fr) 28px; gap: 16px; align-items: baseline; text-decoration: none; padding-block: 18px; border-top: 1px solid var(--line); }
+.index a:first-child { border-top: 0; padding-top: 4px; }
+.index .k { font-family: var(--mono); font-size: 13px; color: var(--accent-ink); letter-spacing: 0.06em; }
+.index .t { font-size: clamp(19px, 1.9vw, 23px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+.index .d { display: block; font-size: 15px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; line-height: 1.5; }
+.index .arr { color: var(--grey); font-size: 20px; transition: transform .2s ease, color .2s ease; }
+.index a:hover .t { color: var(--accent-ink); }
+.index a:hover .arr { color: var(--accent-ink); transform: translateX(4px); }
+.index a[data-pillar] { background: var(--tint); padding: 20px clamp(16px, 2vw, 24px); border-top: 0; margin-top: 8px; box-shadow: inset 4px 0 0 var(--accent); transition: box-shadow .2s ease; }
+.index a[data-pillar]:first-child { margin-top: 0; padding-top: 20px; }
+.index a[data-pillar] .k { color: var(--accent-ink); font-weight: 600; }
+.index a[data-pillar] .arr { color: var(--accent-ink); }
+.index a[data-pillar]:hover { box-shadow: inset 8px 0 0 var(--accent); }
+.index a[data-pillar]:hover .t { color: var(--ink); }
+
+/* Section layout with side nav */
+.split { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); padding-top: 36px; }
+.navcol { position: sticky; top: 90px; align-self: start; min-width: 0; }
+.side { display: grid; gap: 2px; }
+.pills { display: none; }
+.side .mono { color: var(--ink-2); margin-bottom: 10px; }
+.side a { text-decoration: none; font-size: 15px; line-height: 1.35; padding: 9px 12px; border-left: 2px solid var(--line); color: var(--ink-2); display: grid; grid-template-columns: 26px 1fr; gap: 6px; }
+.side a:hover { color: var(--ink); border-left-color: var(--grey); }
+.side a[aria-current="true"] { color: var(--ink); border-left-color: var(--accent-ink); font-weight: 600; }
+.side a .k { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); padding-top: 2px; }
+
+/* Challenge */
+.hmw { font-family: var(--display); font-size: clamp(24px, 3vw, 38px); font-weight: 600; line-height: 1.18; letter-spacing: -0.02em; text-wrap: pretty; }
+.hmw em { font-style: normal; color: var(--accent-ink); }
+.tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-size: 14px; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); text-decoration: none; background: var(--paper); }
+a.tag:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid var(--ink); padding-top: 24px; margin-top: 8px; }
+.pager a { text-decoration: none; display: grid; gap: 4px; }
+.pager a:last-child { text-align: right; }
+.pager .mono { color: var(--ink-2); }
+.pager b { font-weight: 600; font-size: 17px; line-height: 1.3; }
+.pager a:hover b { color: var(--accent-ink); }
+
+/* Bar compare (to scale) */
+.bars { display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; }
+.bar-row .y { font-weight: 700; font-size: 17px; }
+.bar-track { position: relative; height: 34px; }
+.bar { height: 100%; background: var(--grey); display: flex; align-items: center; padding-left: 10px; color: var(--on-accent); font-weight: 600; font-size: 14px; white-space: nowrap; }
+.bar.hot { background: var(--accent); }
+.bar-note { font-size: 14px; color: var(--ink-2); }
+
+/* Footer */
+.foot { margin-top: 24px; }
+.foot .wrap { padding-block: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ink-2); font-size: 14px; }
+
+/* Mobile menu */
+.menu-btn { display: none; align-items: center; gap: 8px; font: 600 15px/1 var(--body); color: var(--ink); background: none; border: 1.5px solid var(--ink); border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+.menu-btn .ico { display: block; stroke: currentColor; stroke-width: 2; stroke-linecap: round; fill: none; overflow: visible; }
+.menu-btn .ico path { transition: transform .2s ease, opacity .2s ease; transform-origin: 8px 6px; }
+.menu-btn[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+.menu-btn[aria-expanded="true"] .l1 { transform: translateY(5px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .l2 { opacity: 0; }
+.menu-btn[aria-expanded="true"] .l3 { transform: translateY(-5px) rotate(-45deg); }
+.drawer { border-top: 1px solid var(--line); max-height: calc(100dvh - 64px - env(safe-area-inset-top, 0px)); overflow-y: auto; overscroll-behavior: contain; }
+.drawer .wrap { padding-block: 8px 28px; display: grid; gap: 22px; }
+.drawer h4 { font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin: 16px 0 6px; }
+.drawer a { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; text-decoration: none; padding: 11px 0; border-top: 1px solid var(--line); font-size: 16px; font-weight: 500; line-height: 1.3; }
+.drawer a.child { padding-left: 20px; font-size: 15px; font-weight: 400; color: var(--ink-2); }
+.drawer a .k { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); padding-top: 3px; }
+.drawer a[aria-current="true"] { color: var(--accent-ink); }
+.drawer .top-link { font-size: 18px; font-weight: 600; grid-template-columns: minmax(0, 1fr); }
+
+/* Phone chart variants */
+.m-only { display: none; }
+.mbars { display: grid; gap: 12px; }
+.mbar-l { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; margin-bottom: 4px; }
+.mbar-l b { font-weight: 700; white-space: nowrap; }
+.mbar-l span { color: var(--ink-2); }
+.mbar-l .hot { color: var(--ink); font-weight: 600; }
+.mbar-t { height: 14px; display: flex; gap: 2px; }
+.mbar-t i { display: block; height: 100%; background: var(--grey); border-radius: 0 3px 3px 0; min-width: 2px; }
+.mbar-t i.b { background: var(--accent); border-radius: 0; }
+.mbar-t i.b:last-child { border-radius: 0 3px 3px 0; }
+.mnote { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.mchart { width: 100%; height: auto; display: block; }
+
+/* Responsive HTML charts in poster style (bars, dots, stacks, unit squares) */
+.cnote { font-family: var(--mono); font-size: 12px; color: var(--ink-3); margin-bottom: 10px; line-height: 1.5; }
+.legend i.dot { border-radius: 50%; }
+.legend i.lt { background: var(--accent-light); }
+.legend i.dash { background: transparent; border: 2px dashed var(--accent-ink); }
+.hc { display: grid; gap: 10px; container-type: inline-size; }
+.split > div:last-child { container-type: inline-size; min-width: 0; }
+@container (max-width: 760px) { .split .row.chart-row { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+@container (max-width: 460px) {
+  .hb, .db, .sk { grid-template-columns: minmax(0, 1fr); }
+  .hb .l, .db .l, .sk .l { text-align: left; }
+  .db .v { grid-column: 1; }
+}
+.hb, .db, .sk { display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 1fr); gap: 4px 16px; align-items: center; }
+.hb .l, .db .l, .sk .l { font-size: 14px; color: var(--ink-2); text-align: right; line-height: 1.3; }
+.hb.b .l { color: var(--ink); font-weight: 600; }
+.hb .tr { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.hb .bar { display: block; flex: none; height: 18px; min-width: 2px; background: var(--grey); border-radius: 0 4px 4px 0; }
+.hb.b .bar { background: var(--accent); }
+.hb.lt .bar { background: var(--accent-light); }
+.hb .v { font-size: 15px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.hb.b .v { color: var(--ink); font-weight: 700; }
+.db .tr { position: relative; height: 26px; border-left: 2px solid var(--axis); }
+.db .seg { position: absolute; top: 11px; height: 4px; background: var(--grey); border-radius: 2px; }
+.db .d { position: absolute; top: 5px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--grey); border: 2px solid var(--paper); }
+.db .d.b { background: var(--accent); }
+.db .v { grid-column: 2; font-size: 14px; color: var(--ink-2); }
+.db .v b { color: var(--ink); }
+.sk .tr { display: flex; gap: 2px; height: 30px; }
+.sk .tr span { display: flex; align-items: center; padding-inline: 8px; font-size: 14px; font-weight: 600; background: var(--grey); color: var(--ink); white-space: nowrap; overflow: hidden; min-width: 0; }
+.sk .tr span.b { background: var(--accent); color: var(--on-accent); }
+.sk .tr span:last-child { border-radius: 0 4px 4px 0; justify-content: flex-end; }
+.sk.wide { grid-template-columns: minmax(0, 1fr); }
+.sk.wide .tr { height: 48px; }
+.ugrid { display: flex; flex-wrap: wrap; gap: 2px; }
+.ugrid i { width: var(--u, 8px); height: var(--u, 8px); border-radius: 1.5px; background: var(--grey); }
+.ugrid i.b { background: var(--accent); }
+.uhead { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; font-size: 14px; color: var(--ink-2); margin-bottom: 6px; }
+.uhead b { color: var(--ink); font-size: 16px; }
+.ublock { display: grid; gap: 4px; padding-block: 12px; border-top: 1px solid var(--line); }
+.ublock:first-child { border-top: 0; padding-top: 0; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 20px 28px; }
+.tile { border-top: 6px solid var(--grey); padding-top: 14px; display: grid; gap: 6px; align-content: start; }
+.tile.b { border-top-color: var(--accent-ink); }
+.tile b { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4vw, 48px); letter-spacing: -0.03em; line-height: 1; }
+.tile.b b { color: var(--accent-ink); }
+.tile span { font-size: 14px; color: var(--ink-2); }
+.chain { font-size: clamp(17px, 1.8vw, 21px); font-weight: 500; line-height: 1.45; margin-top: 22px; }
+.chain i { font-style: normal; color: var(--ink-3); }
+.sandwich { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: start; }
+.sandwich .arr { padding-top: 26px; text-align: center; color: var(--ink-3); font-size: 28px; line-height: 1; }
+.sandwich .arr small { display: block; font-family: var(--mono); font-size: 11px; margin-top: 4px; }
+.kicker-l { font-size: clamp(20px, 2.4vw, 30px); font-weight: 600; line-height: 1.25; max-width: 40ch; margin-bottom: 14px; letter-spacing: -0.01em; }
+.prose-b { font-size: 16px; line-height: 1.55; margin-top: 18px; }
+@media (max-width: 600px) {
+  .sandwich { grid-template-columns: minmax(0, 1fr); }
+  .sandwich .arr { padding-top: 0; display: flex; align-items: center; gap: 10px; }
+  .sandwich .arr .g { display: inline-block; transform: rotate(90deg); }
+  .sandwich .arr small { margin-top: 0; }
+}
+
+.sk .tr span.none { background: transparent; }
+.hb.dash .bar { background: transparent; border: 2px dashed var(--ink-3); height: 18px; }
+.gapmap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr); gap: 10px; }
+.gapmap > div { padding: 16px; display: grid; gap: 6px; align-content: start; background: var(--shade); font-size: 14px; color: var(--ink-2); line-height: 1.4; }
+.gapmap b { color: var(--ink); font-size: 16px; }
+.gapmap .gap { background: var(--accent-wash); outline: 2px dashed var(--accent-ink); outline-offset: -2px; text-align: center; }
+.gapmap .gap strong { color: var(--accent-ink); font-size: 16px; margin-top: 6px; }
+.houses { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.houses svg { width: clamp(30px, 5vw, 44px); height: auto; }
+.hh { font-size: 14px; color: var(--ink-2); margin-bottom: 8px; }
+.hb-strong { font-weight: 700; margin-top: 10px; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; border-left: 3px solid var(--axis); margin-left: 6px; }
+.tl li { position: relative; padding: 0 0 18px 22px; display: grid; gap: 2px; }
+.tl li::before { content: ""; position: absolute; left: -10px; top: 3px; width: 13px; height: 13px; border-radius: 50%; background: var(--grey); border: 2px solid var(--paper); }
+.tl li.b::before { background: var(--accent); }
+.tl .y { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+.tl b { font-size: 15px; font-weight: 600; }
+.tl span { font-size: 14px; color: var(--ink-2); }
+.tl-band { background: var(--accent-wash); padding: 8px 12px; font-weight: 700; font-size: 15px; margin-bottom: 18px; }
+@container (max-width: 460px) { .gapmap { grid-template-columns: minmax(0, 1fr); } }
+
+.hb.ref .bar { background: var(--ink); height: 4px; }
+.hb.ref .l, .hb.ref .v { color: var(--ink); font-weight: 700; }
+.tile.dot { border-top-style: dotted; }
+.tile.dot b { color: var(--ink-3); }
+.tiles.wide { margin-block: 8px 28px; }
+.hero-n { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 32px; align-items: end; padding-bottom: 28px; }
+.hero-n .big { margin-top: 0; font-size: clamp(76px, 13vw, 168px); white-space: nowrap; }
+.hero-n p { font-size: clamp(18px, 2vw, 24px); font-weight: 500; line-height: 1.3; max-width: 26ch; padding-bottom: 10px; }
+.sec-full { border-top: 1px solid var(--ink); padding-block: 28px; display: grid; gap: 14px; }
+.sec-full h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 600; }
+.sec-full .mono { color: var(--ink-2); }
+.struck { display: flex; flex-wrap: wrap; gap: 4px 28px; font-family: var(--display); font-weight: 700; font-size: clamp(30px, 5vw, 56px); letter-spacing: -0.02em; color: var(--grey); line-height: 1.1; }
+.struck s { text-decoration-thickness: 4px; text-decoration-color: var(--ink); }
+.two ul { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; font-size: 16px; line-height: 1.5; }
+.two.tops > div { border-top: 6px solid var(--grey); padding-top: 14px; }
+.two.tops > div:first-child { border-top-color: var(--accent); }
+@container (max-width: 520px) { .hero-n { grid-template-columns: minmax(0, 1fr); } }
+
+/* Professional journal band (časopis Sociální služby) */
+.mag { background: var(--tint); margin-top: 56px; }
+.mag + .kraje { margin-top: 0; }
+.mag .wrap { padding-block: clamp(40px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 64px); }
+.mag-head { align-self: start; position: sticky; top: 88px; display: grid; gap: 14px; }
+.mag-head .mono { color: var(--accent-ink); }
+.mag-head h2 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 700; letter-spacing: -0.03em; }
+.mag-head p { color: var(--ink-2); font-size: 15px; max-width: 40ch; }
+.mag-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.mag-list { display: grid; min-width: 0; }
+.mrow { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); padding-block: 22px; border-top: 1px solid var(--tint-line); }
+.mrow:first-child { border-top: 2px solid var(--accent); }
+.mfig { font-family: var(--display); font-weight: 700; color: var(--accent-ink); font-size: clamp(30px, 3.4vw, 44px); line-height: 1; letter-spacing: -0.035em; overflow-wrap: anywhere; }
+.mfig.sym { font-weight: 500; color: var(--ink); }
+.mbody { display: grid; gap: 8px; min-width: 0; }
+.mtag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.mtag b { font-weight: 500; color: var(--accent-ink); }
+.mbody h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+.mbody p { font-size: 15px; }
+.mbody .pro { padding-left: 12px; border-left: 2px solid var(--accent); color: var(--ink); }
+.mbody .pro b { color: var(--accent-ink); font-weight: 600; }
+@media (max-width: 900px) {
+  .mag .wrap { grid-template-columns: minmax(0, 1fr); }
+  .mag-head { position: static; }
+}
+@media (max-width: 520px) {
+  .mrow { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+}
+
+/* Regional plans (SPRSS) band */
+.kraje { background: var(--white); margin-top: 56px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.kraje .wrap { padding-block: clamp(40px, 6vw, 72px); display: grid; gap: 28px; }
+.kraje-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: end; }
+.kraje-head .mono { color: var(--ink-2); margin-bottom: 12px; }
+.kraje-head h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 600; }
+.kraje-head p { color: var(--ink-2); max-width: 60ch; }
+.kraje-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 16px; }
+.kcard { background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 22px 22px 20px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.kcard .meta2 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.kcard .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.chip { font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; border: 1.5px solid var(--ink); color: var(--ink); line-height: 1.5; }
+.chip.inovace { background: var(--accent); border-color: var(--accent-ink); color: var(--on-accent); }
+.chip.napeti { border-style: dashed; }
+.chip.mezera { border-style: dotted; color: var(--ink-2); border-color: var(--ink-2); }
+.kcard h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+.kcard p { font-size: 15px; line-height: 1.5; }
+.kcard .rel { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 2px; color: var(--ink-2); }
+.kcard .rel b { color: var(--accent-ink); font-weight: 600; }
+.kraje details { font-size: 14px; color: var(--ink-2); }
+.kraje summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+.kraje summary:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+.kraje table { border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+.kraje td { padding: 5px 20px 5px 0; border-top: 1px solid var(--line); }
+.table-scroll { overflow-x: auto; }
+@media (max-width: 900px) { .kraje-head { grid-template-columns: minmax(0, 1fr); } }
+
+/* Poster subpages */
+.poster-h { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 6.4vw, 88px); line-height: 0.98; letter-spacing: -0.035em; text-wrap: balance; }
+.poster-h em, .poster-sub em { font-style: normal; color: var(--accent-ink); }
+.poster-h .soft { color: var(--blue-soft); }
+.poster-sub { font-size: clamp(20px, 2.3vw, 30px); font-weight: 500; line-height: 1.3; margin-top: 18px; max-width: 32ch; letter-spacing: -0.01em; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: end; padding-block: 8px 36px; }
+.picto { width: clamp(150px, 20vw, 260px); height: auto; }
+.lead-row { padding-block: 0 36px; }
+.sec-h { padding-block: 36px 28px; border-top: 1px solid var(--line); }
+.row.chart-row { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; font-size: 14px; color: var(--ink-2); margin-bottom: 14px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 7px; vertical-align: -1px; background: var(--grey); }
+.legend i.b { background: var(--accent); }
+.legend i.line { height: 3px; width: 22px; border-radius: 2px; vertical-align: 3px; }
+.legend .mono { font-size: 11px; color: var(--ink-3); }
+.chart-scroll { overflow-x: auto; }
+.chart-scroll > svg { min-width: 560px; }
+.chart-scroll.wide > svg { min-width: 720px; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 36px); margin-block: 28px 36px; }
+.trio > div { border-top: 4px solid var(--grey); padding-top: 18px; display: grid; gap: 6px; align-content: start; }
+.trio > div.b { border-top-color: var(--accent-ink); }
+.trio > div.l { border-top-color: var(--accent-light); }
+.trio > div.dot { border-top: 4px dotted var(--grey); }
+.trio b { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 5.4vw, 72px); letter-spacing: -0.04em; line-height: 1; }
+.trio > div.b b { color: var(--accent-ink); }
+.trio small { font-size: 0.42em; letter-spacing: -0.01em; color: var(--ink-2); font-weight: 600; margin-right: 6px; }
+.trio span { font-size: 15px; color: var(--ink-2); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); padding-block: 36px; border-top: 1px solid var(--ink); }
+.two h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 600; margin-block: 12px 14px; }
+.two .mono, .sec-h .mono { color: var(--ink-2); }
+.statement { font-size: clamp(21px, 2.4vw, 30px); line-height: 1.4; max-width: 38ch; padding-block: 36px; letter-spacing: -0.01em; }
+.statement b { font-weight: 700; }
+.src { border-top: 1px solid var(--ink); padding-top: 18px; font-size: 13px; color: var(--ink-2); max-width: 90ch; margin-bottom: 32px; }
+.fact-link { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
+.fact-link:hover { text-decoration: underline; }
+.side a.child { margin-left: 14px; font-size: 14px; padding-block: 6px; }
+
+@media (max-width: 900px) {
+  .row.chart-row, .two { grid-template-columns: minmax(0, 1fr); }
+  .side a.child { margin-left: 0; }
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .split { grid-template-columns: minmax(0, 1fr); padding-top: 20px; }
+  .navcol { position: static; }
+  .side { display: none; }
+  .pills { display: grid; gap: 12px; }
+  .pill-row { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+  .pill-row::-webkit-scrollbar { display: none; }
+  .pill-row a { flex: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; text-decoration: none; font-size: 14px; color: var(--ink); padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); }
+  .pill-row a .k { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); }
+  .pill-row.main a { font-weight: 600; font-size: 15px; padding: 9px 15px; }
+  .pill-row a[aria-current="true"] { background: var(--accent); border-color: var(--accent-ink); color: var(--on-accent); }
+  .pill-row a[aria-current="true"] .k { color: var(--on-accent); }
+  .pill-row a.parent { border-color: var(--accent-ink); color: var(--accent-ink); }
+  .pill-sub { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .pill-sub .mono { color: var(--ink-2); }
+}
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .menu-btn { display: inline-flex; }
+  .top .wrap { flex-wrap: nowrap; padding-block: 10px; }
+  .meta { display: none; }
+  .band { margin-top: 0; }
+  .split { padding-top: 16px; }
+}
+@media (min-width: 761px) { .drawer { display: none; } }
+@media (max-width: 600px) {
+  .m-only { display: block; }
+  .d-only { display: none; }
+  .ger svg text { font-size: 34px; }
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stat, .stat + .stat { padding: 18px 0; border-left: 0; }
+  .stat + .stat { border-top: 1px solid var(--line); }
+  .stat { grid-template-columns: minmax(0, 7fr) minmax(0, 8fr); align-items: baseline; gap: 14px; }
+  .row { padding-block: 28px; }
+  .kcard { padding: 18px; }
+  .index a { padding-block: 14px; }
+  .big { font-size: clamp(52px, 16vw, 72px); }
+}
+@media (max-width: 520px) {
+  .trio { grid-template-columns: minmax(0, 1fr); }
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .picto { width: 150px; }
+  body { font-size: 16px; }
+  .index a { grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 10px; }
+  .pager { grid-template-columns: minmax(0, 1fr); }
+  .pager a:last-child { text-align: left; }
+}
+/* Graphic elements: colour-block mosaics, shifted stripes and bar rhythms drawn from the pillar palette (flat fills, no gradients) */
+.band .txt { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.band.has-art .wrap { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(28px, 5vw, 80px); padding-bottom: 0; }
+.band.has-art .txt { padding-bottom: clamp(28px, 5vw, 56px); }
+.band .art { min-width: 0; align-self: end; display: grid; gap: 10px; }
+.band .art svg { display: block; width: 100%; height: clamp(180px, 20vw, 260px); }
+.band.lead .wrap { padding-top: clamp(40px, 6vw, 80px); }
+.band.lead .art svg { height: clamp(260px, 30vw, 400px); }
+.art-cap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.85; display: flex; justify-content: space-between; gap: 12px; }
+.pips { display: flex; gap: 3px; margin-top: 8px; }
+.pips i { display: block; width: 6px; height: 18px; background: var(--accent); }
+.bridge { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--ink); }
+.bridge h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 600; }
+.bridge .label { color: var(--ink-2); margin-bottom: 14px; }
+.bridge p { color: var(--ink-2); font-size: 15px; margin-top: 16px; max-width: 40ch; }
+.plegend { display: grid; gap: 8px; margin-top: 24px; font-size: 14px; color: var(--ink-2); }
+.plegend span { display: grid; grid-template-columns: 22px 14px 1fr; gap: 8px; align-items: center; }
+.plegend i { width: 22px; height: 12px; background: var(--accent); }
+.plegend b { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent-ink); }
+.poly { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 18px); align-items: start; }
+.poly a { display: grid; gap: 10px; text-decoration: none; min-width: 0; }
+.poly svg { display: block; width: 100%; height: clamp(160px, 22vw, 280px); transition: transform .25s ease; transform-origin: bottom; }
+.poly a:hover svg { transform: scaleY(1.04); }
+.poly .mono { color: var(--ink); font-weight: 500; border-top: 1px solid var(--ink); padding-top: 8px; }
+.poly .t { font-size: 14px; line-height: 1.3; color: var(--ink-2); overflow-wrap: anywhere; }
+.poly a:hover .t { color: var(--ink); }
+.sig { display: block; width: 100%; height: 10px; }
+@media (max-width: 900px) { .bridge { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) {
+  .band.has-art .wrap { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .band.has-art .txt { padding-bottom: 24px; }
+  .band .art svg { height: 96px; }
+  .band.lead .art svg { height: 180px; }
+}
+@media (max-width: 520px) {
+  .poly { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 24px; }
+  .poly svg { height: 120px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #app > * { animation: rise .35s ease both; }
+  @keyframes rise { from { transform: translateY(6px); } to { transform: none; } }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#uvod"><b>Ekosystém péče</b><span>2035</span></a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <a href="#uvod" data-sec="uvod">Přehled</a>
+      <a href="#bariery" data-sec="bariery">Bariéry a rizika</a>
+      <a href="#vyzvy" data-sec="vyzvy">Designové výzvy</a>
+    </nav>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="drawer"><svg class="ico" width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path class="l1" d="M1 1h14"/><path class="l2" d="M1 6h14"/><path class="l3" d="M1 11h14"/></svg><span id="menu-label">Menu</span></button>
+  </div>
+  <nav class="drawer" id="drawer" aria-label="Mapa webu" hidden></nav>
+</header>
+
+<div class="wrap meta mono">Neformální péče v Česku: systémová výzva vyžadující systémovou odpověď</div>
+
+<div id="app"></div>
+
+<footer class="foot">
+  <div id="sig"></div>
+  <div class="wrap">
+    <span>Udržitelný ekosystém péče 2035 · draft akčního plánu</span>
+    <span class="mono">KISK MU · Kampus Hybernská · říjen 2026</span>
+  </div>
+</footer>
+
+<template id="svg-rust"><svg viewBox="0 0 1000 420" width="100%" style="display: block; height: auto" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" role="img" aria-label="Index počtu osob podle věkových skupin, 2025 = 100"><line x1="64" x2="824" y1="370.0" y2="370.0" stroke="var(--line)" stroke-width="1.5"></line><text x="52" y="377.0" text-anchor="end" font-size="20" fill="var(--ink-3)">80</text><line x1="64" x2="824" y1="307.1" y2="307.1" stroke="var(--axis)" stroke-width="1.5"></line><text x="52" y="314.1" text-anchor="end" font-size="20" fill="var(--ink-3)">100</text><line x1="64" x2="824" y1="244.2" y2="244.2" stroke="var(--line)" stroke-width="1.5"></line><text x="52" y="251.2" text-anchor="end" font-size="20" fill="var(--ink-3)">120</text><line x1="64" x2="824" y1="181.3" y2="181.3" stroke="var(--line)" stroke-width="1.5"></line><text x="52" y="188.3" text-anchor="end" font-size="20" fill="var(--ink-3)">140</text><line x1="64" x2="824" y1="118.4" y2="118.4" stroke="var(--line)" stroke-width="1.5"></line><text x="52" y="125.4" text-anchor="end" font-size="20" fill="var(--ink-3)">160</text><line x1="64" x2="824" y1="55.5" y2="55.5" stroke="var(--line)" stroke-width="1.5"></line><text x="52" y="62.5" text-anchor="end" font-size="20" fill="var(--ink-3)">180</text><text x="64.0" y="406" text-anchor="middle" font-size="20" fill="var(--ink-3)">2025</text><text x="216.0" y="406" text-anchor="middle" font-size="20" fill="var(--ink-3)">2030</text><text x="368.0" y="406" text-anchor="middle" font-size="20" fill="var(--ink-3)">2035</text><text x="520.0" y="406" text-anchor="middle" font-size="20" fill="var(--ink-3)">2040</text><text x="672.0" y="406" text-anchor="middle" font-size="20" fill="var(--ink-3)">2045</text><text x="824.0" y="406" text-anchor="middle" font-size="20" fill="var(--ink-3)">2050</text><path d="M64.0,307.1L94.4,318.4L124.8,328.7L155.2,334.8L185.6,329.7L216.0,317.4L246.4,309.1L276.8,304.5L307.2,301.4L337.6,305.0L368.0,307.1L398.4,304.0L428.8,295.8L459.2,282.4L489.6,259.3L520.0,236.2L550.4,215.6L580.8,200.2L611.2,189.9L641.6,188.4L672.0,196.1L702.4,208.9L732.8,224.3L763.2,237.7L793.6,250.6L824.0,261.9" fill="none" stroke="var(--grey)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path><path d="M64.0,307.1L94.4,308.6L124.8,312.2L155.2,317.9L185.6,325.1L216.0,336.3L246.4,347.1L276.8,354.8L307.2,357.9L337.6,352.2L368.0,340.4L398.4,333.3L428.8,328.1L459.2,325.6L489.6,328.1L520.0,329.2L550.4,326.1L580.8,317.9L611.2,303.5L641.6,283.0L672.0,261.4L702.4,240.9L732.8,225.5L763.2,216.3L793.6,215.2L824.0,221.4" fill="none" stroke="var(--grey)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path><path d="M64.0,307.1L94.4,294.8L124.8,293.5L155.2,294.8L185.6,294.8L216.0,293.5L246.4,294.1L276.8,296.0L307.2,300.9L337.6,308.3L368.0,319.4L398.4,328.7L428.8,336.1L459.2,339.8L489.6,333.0L520.0,320.7L550.4,310.8L580.8,304.0L611.2,300.9L641.6,303.4L672.0,304.0L702.4,299.7L732.8,288.6L763.2,274.4L793.6,251.6L824.0,225.7" fill="none" stroke="var(--grey)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path><path d="M64.0,307.1L94.4,291.8L124.8,267.6L155.2,243.4L185.6,222.3L216.0,204.1L246.4,185.9L276.8,167.8L307.2,150.8L337.6,136.3L368.0,123.0L398.4,111.5L428.8,101.2L459.2,94.6L489.6,92.2L520.0,93.4L550.4,94.6L580.8,94.6L611.2,93.4L641.6,86.1L672.0,77.0L702.4,69.8L732.8,64.9L763.2,60.1L793.6,55.8L824.0,46.8L824.0,370.0L64.0,370.0Z" fill="var(--accent-wash)"></path><path d="M64.0,307.1L94.4,291.8L124.8,267.6L155.2,243.4L185.6,222.3L216.0,204.1L246.4,185.9L276.8,167.8L307.2,150.8L337.6,136.3L368.0,123.0L398.4,111.5L428.8,101.2L459.2,94.6L489.6,92.2L520.0,93.4L550.4,94.6L580.8,94.6L611.2,93.4L641.6,86.1L672.0,77.0L702.4,69.8L732.8,64.9L763.2,60.1L793.6,55.8L824.0,46.8" fill="none" stroke="var(--accent-ink)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="368.0" cy="123.0" r="8" fill="var(--accent)" stroke="var(--paper)" stroke-width="3"></circle><circle cx="824.0" cy="46.8" r="8" fill="var(--accent)" stroke="var(--paper)" stroke-width="3"></circle><text x="352.0" y="109.0" text-anchor="end" font-size="22" fill="var(--ink-2)">2035: 159</text><text x="842.0" y="54.8" font-size="26" font-weight="700" fill="var(--ink)">80+ · 183</text><text x="842.0" y="82.8" font-size="22" fill="var(--ink-2)">×1,83</text><text x="842.0" y="249.6" font-size="22" fill="var(--ink-2)">65–79 · 114–127</text></svg></template>
+<template id="svg-prirustek"><svg viewBox="0 0 1000 380" width="100%" style="display: block; height: auto" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" role="img" aria-label="Meziroční přírůstek počtu osob 80+"><rect x="127.7" y="4" width="392.5" height="326" rx="6" fill="var(--accent-wash)"></rect><text x="141.7" y="32" font-size="22" font-weight="600" fill="var(--ink)">demografický zlom 2027–2037</text><line x1="92" x2="984" y1="280.2" y2="280.2" stroke="var(--axis)" stroke-width="1.5"></line><text x="80" y="287.2" text-anchor="end" font-size="20" fill="var(--ink-3)">0</text><line x1="92" x2="984" y1="230.4" y2="230.4" stroke="var(--line)" stroke-width="1.5"></line><text x="80" y="237.4" text-anchor="end" font-size="20" fill="var(--ink-3)">10 000</text><line x1="92" x2="984" y1="180.5" y2="180.5" stroke="var(--line)" stroke-width="1.5"></line><text x="80" y="187.5" text-anchor="end" font-size="20" fill="var(--ink-3)">20 000</text><line x1="92" x2="984" y1="130.7" y2="130.7" stroke="var(--line)" stroke-width="1.5"></line><text x="80" y="137.7" text-anchor="end" font-size="20" fill="var(--ink-3)">30 000</text><line x1="92" x2="984" y1="80.9" y2="80.9" stroke="var(--line)" stroke-width="1.5"></line><text x="80" y="87.9" text-anchor="end" font-size="20" fill="var(--ink-3)">40 000</text><path d="M97.8,280.2V159.6Q97.8,154.6 102.8,154.6H116.8Q121.8,154.6 121.8,159.6V280.2Z" fill="var(--grey)"></path><path d="M133.5,280.2V85.9Q133.5,80.9 138.5,80.9H152.5Q157.5,80.9 157.5,85.9V280.2Z" fill="var(--accent)"></path><text x="145.5" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2027</text><path d="M169.2,280.2V85.9Q169.2,80.9 174.2,80.9H188.2Q193.2,80.9 193.2,85.9V280.2Z" fill="var(--accent)"></path><path d="M204.9,280.2V110.8Q204.9,105.8 209.9,105.8H223.9Q228.9,105.8 228.9,110.8V280.2Z" fill="var(--accent)"></path><path d="M240.6,280.2V135.7Q240.6,130.7 245.6,130.7H259.6Q264.6,130.7 264.6,135.7V280.2Z" fill="var(--accent)"></path><text x="252.6" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2030</text><path d="M276.2,280.2V135.7Q276.2,130.7 281.2,130.7H295.2Q300.2,130.7 300.2,135.7V280.2Z" fill="var(--accent)"></path><path d="M311.9,280.2V135.7Q311.9,130.7 316.9,130.7H330.9Q335.9,130.7 335.9,135.7V280.2Z" fill="var(--accent)"></path><path d="M347.6,280.2V145.7Q347.6,140.7 352.6,140.7H366.6Q371.6,140.7 371.6,145.7V280.2Z" fill="var(--accent)"></path><path d="M383.3,280.2V165.6Q383.3,160.6 388.3,160.6H402.3Q407.3,160.6 407.3,165.6V280.2Z" fill="var(--accent)"></path><path d="M419.0,280.2V175.6Q419.0,170.6 424.0,170.6H438.0Q443.0,170.6 443.0,175.6V280.2Z" fill="var(--accent)"></path><text x="431.0" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2035</text><path d="M454.6,280.2V190.5Q454.6,185.5 459.6,185.5H473.6Q478.6,185.5 478.6,190.5V280.2Z" fill="var(--accent)"></path><path d="M490.3,280.2V200.5Q490.3,195.5 495.3,195.5H509.3Q514.3,195.5 514.3,200.5V280.2Z" fill="var(--accent)"></path><text x="502.3" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2037</text><path d="M526.0,280.2V230.4Q526.0,225.4 531.0,225.4H545.0Q550.0,225.4 550.0,230.4V280.2Z" fill="var(--grey)"></path><path d="M561.7,280.2V265.3Q561.7,260.3 566.7,260.3H580.7Q585.7,260.3 585.7,265.3V280.2Z" fill="var(--grey)"></path><path d="M597.4,280.2V285.2Q597.4,290.1 602.3,290.1H616.4Q621.4,290.1 621.4,285.2V280.2Z" fill="var(--grey)"></path><text x="609.4" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2040</text><path d="M633.0,280.2V285.2Q633.0,290.1 638.0,290.1H652.1Q657.0,290.1 657.0,285.2V280.2Z" fill="var(--grey)"></path><path d="M668.7,279.2h24.0v2h-24.0Z" fill="var(--grey)"></path><path d="M704.4,280.2V275.2Q704.4,270.2 709.4,270.2H723.4Q728.4,270.2 728.4,275.2V280.2Z" fill="var(--grey)"></path><path d="M740.1,280.2V225.4Q740.1,220.4 745.1,220.4H759.1Q764.1,220.4 764.1,225.4V280.2Z" fill="var(--grey)"></path><path d="M775.8,280.2V210.5Q775.8,205.5 780.8,205.5H794.8Q799.8,205.5 799.8,210.5V280.2Z" fill="var(--grey)"></path><text x="787.8" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2045</text><path d="M811.4,280.2V225.4Q811.4,220.4 816.4,220.4H830.4Q835.4,220.4 835.4,225.4V280.2Z" fill="var(--grey)"></path><path d="M847.1,280.2V245.3Q847.1,240.3 852.1,240.3H866.1Q871.1,240.3 871.1,245.3V280.2Z" fill="var(--grey)"></path><path d="M882.8,280.2V245.3Q882.8,240.3 887.8,240.3H901.8Q906.8,240.3 906.8,245.3V280.2Z" fill="var(--grey)"></path><path d="M918.5,280.2V250.3Q918.5,245.3 923.5,245.3H937.5Q942.5,245.3 942.5,250.3V280.2Z" fill="var(--grey)"></path><path d="M954.2,280.2V210.5Q954.2,205.5 959.2,205.5H973.2Q978.2,205.5 978.2,210.5V280.2Z" fill="var(--grey)"></path><text x="966.2" y="366" text-anchor="middle" font-size="20" fill="var(--ink-3)">2050</text><text x="145.5" y="68.9" text-anchor="middle" font-size="24" font-weight="700" fill="var(--ink)">+40 tis.</text></svg></template>
+<template id="svg-klienti"><svg viewBox="0 0 1000 300" width="100%" style="display: block; height: auto" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" role="img" aria-label="Odhad počtu klientů služeb dlouhodobé péče mezi osobami 80+"><line x1="92.0" x2="92.0" y1="8" y2="256" stroke="var(--axis)" stroke-width="1.5"></line><text x="92.0" y="288" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text><line x1="269.0" x2="269.0" y1="8" y2="256" stroke="var(--line)" stroke-width="1.5"></line><text x="269.0" y="288" text-anchor="middle" font-size="20" fill="var(--ink-3)">250 000</text><line x1="446.0" x2="446.0" y1="8" y2="256" stroke="var(--line)" stroke-width="1.5"></line><text x="446.0" y="288" text-anchor="middle" font-size="20" fill="var(--ink-3)">500 000</text><line x1="623.0" x2="623.0" y1="8" y2="256" stroke="var(--line)" stroke-width="1.5"></line><text x="623.0" y="288" text-anchor="middle" font-size="20" fill="var(--ink-3)">750 000</text><line x1="800.0" x2="800.0" y1="8" y2="256" stroke="var(--line)" stroke-width="1.5"></line><text x="800.0" y="288" text-anchor="middle" font-size="20" fill="var(--ink-3)">1 000 000</text><text x="78" y="50.3" text-anchor="end" font-size="26" font-weight="700" fill="var(--ink)">2025</text><path d="M92.0,21.3H180.3V61.3H92.0Z" fill="var(--accent)"></path><path d="M183.3,21.3H455.0Q460.0,21.3 460.0,26.3V56.3Q460.0,61.3 455.0,61.3H183.3Z" fill="var(--grey)"></path><text x="104.0" y="49.3" font-size="22" font-weight="700" fill="var(--on-accent)">125 tis.</text><text x="474.0" y="49.3" font-size="22" fill="var(--ink-2)">520 tis. celkem</text><text x="78" y="133.0" text-anchor="end" font-size="26" font-weight="700" fill="var(--ink)">2035</text><path d="M92.0,104.0H232.0V144.0H92.0Z" fill="var(--accent)"></path><path d="M235.0,104.0H670.4Q675.4,104.0 675.4,109.0V139.0Q675.4,144.0 670.4,144.0H235.0Z" fill="var(--grey)"></path><text x="104.0" y="132.0" font-size="22" font-weight="700" fill="var(--on-accent)">198 tis.</text><text x="689.4" y="132.0" font-size="22" fill="var(--ink-2)">824 tis. celkem</text><text x="92.0" y="168.0" font-size="20" fill="var(--ink-2)">+73 tis. klientů oproti 2025 (+59 %)</text><text x="78" y="215.7" text-anchor="end" font-size="26" font-weight="700" fill="var(--ink)">2050</text><path d="M92.0,186.7H253.4V226.7H92.0Z" fill="var(--accent)"></path><path d="M256.4,186.7H759.6Q764.6,186.7 764.6,191.7V221.7Q764.6,226.7 759.6,226.7H256.4Z" fill="var(--grey)"></path><text x="104.0" y="214.7" font-size="22" font-weight="700" fill="var(--on-accent)">228 tis.</text><text x="778.6" y="214.7" font-size="22" fill="var(--ink-2)">950 tis. celkem</text><text x="92.0" y="250.7" font-size="20" fill="var(--ink-2)">+103 tis. klientů oproti 2025 (+83 %)</text></svg></template>
+<template id="svg-uvazky"><svg viewBox="0 0 1500 500" width="100%" style="display: block; height: auto" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" role="img" aria-label="Nárůst potřeby úvazků 2024–2035 podle profese. Celkem 28 372, z toho pečující pracovníci 14 884."><line x1="440.0" x2="440.0" y1="6" y2="456" stroke="var(--axis)" stroke-width="1.5"></line><text x="440.0" y="488" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text><line x1="657.5" x2="657.5" y1="6" y2="456" stroke="var(--line)" stroke-width="1.5"></line><text x="657.5" y="488" text-anchor="middle" font-size="19" fill="var(--ink-3)">4 000</text><line x1="875.0" x2="875.0" y1="6" y2="456" stroke="var(--line)" stroke-width="1.5"></line><text x="875.0" y="488" text-anchor="middle" font-size="19" fill="var(--ink-3)">8 000</text><line x1="1092.5" x2="1092.5" y1="6" y2="456" stroke="var(--line)" stroke-width="1.5"></line><text x="1092.5" y="488" text-anchor="middle" font-size="19" fill="var(--ink-3)">12 000</text><line x1="1310.0" x2="1310.0" y1="6" y2="456" stroke="var(--line)" stroke-width="1.5"></line><text x="1310.0" y="488" text-anchor="middle" font-size="19" fill="var(--ink-3)">16 000</text><text x="424" y="38.5" text-anchor="end" font-size="21" font-weight="600" fill="var(--ink)">pečující pracovníci</text><path d="M440.0,16.0h804.3q5,0 5,5v20q0,5 -5,5h-804.3Z" fill="var(--accent)"></path><text x="1261.3" y="38.5" font-size="21"><tspan font-weight="700" fill="var(--ink)">+14 884</tspan><tspan fill="var(--ink-2)">  52 %</tspan></text><text x="424" y="88.5" text-anchor="end" font-size="21" font-weight="600" fill="var(--ink)">obslužný personál</text><path d="M440.0,66.0h295.2q5,0 5,5v20q0,5 -5,5h-295.2Z" fill="var(--accent)"></path><text x="752.2" y="88.5" font-size="21"><tspan font-weight="700" fill="var(--ink)">+5 521</tspan><tspan fill="var(--ink-2)">  19 %</tspan></text><text x="424" y="138.5" text-anchor="end" font-size="21" font-weight="600" fill="var(--ink)">zdravotnický personál</text><path d="M440.0,116.0h183.0q5,0 5,5v20q0,5 -5,5h-183.0Z" fill="var(--accent)"></path><text x="640.0" y="138.5" font-size="21"><tspan font-weight="700" fill="var(--ink)">+3 457</tspan><tspan fill="var(--ink-2)">  12 %</tspan></text><text x="424" y="188.5" text-anchor="end" font-size="21" font-weight="400" fill="var(--ink-2)">sociální pracovníci</text><path d="M440.0,166.0h65.7q5,0 5,5v20q0,5 -5,5h-65.7Z" fill="var(--grey)"></path><text x="522.7" y="188.5" font-size="21"><tspan fill="var(--ink-2)">+1 300</tspan></text><text x="424" y="238.5" text-anchor="end" font-size="21" font-weight="400" fill="var(--ink-2)">administrativní pracovníci</text><path d="M440.0,216.0h65.7q5,0 5,5v20q0,5 -5,5h-65.7Z" fill="var(--grey)"></path><text x="522.7" y="238.5" font-size="21"><tspan fill="var(--ink-2)">+1 300</tspan></text><text x="424" y="288.5" text-anchor="end" font-size="21" font-weight="400" fill="var(--ink-2)">vedoucí pracovníci</text><path d="M440.0,266.0h49.4q5,0 5,5v20q0,5 -5,5h-49.4Z" fill="var(--grey)"></path><text x="506.4" y="288.5" font-size="21"><tspan fill="var(--ink-2)">+1 000</tspan></text><text x="424" y="338.5" text-anchor="end" font-size="21" font-weight="400" fill="var(--ink-2)">vychovatelé a pedagogičtí pracovníci</text><path d="M440.0,316.0h33.1q5,0 5,5v20q0,5 -5,5h-33.1Z" fill="var(--grey)"></path><text x="490.1" y="338.5" font-size="21"><tspan fill="var(--ink-2)">+700</tspan></text><text x="424" y="388.5" text-anchor="end" font-size="21" font-weight="400" fill="var(--ink-2)">odborní pracovníci</text><path d="M440.0,366.0h4.1q4.078125,0 4.078125,4.078125v21.84375q0,4.078125 -4.078125,4.078125h-4.1Z" fill="var(--grey)"></path><text x="460.2" y="388.5" font-size="21"><tspan fill="var(--ink-2)">+150</tspan></text><text x="424" y="438.5" text-anchor="end" font-size="21" font-weight="400" fill="var(--ink-2)">ostatní</text><path d="M440.0,416.0h1.6q1.6312499999999943,0 1.6312499999999943,1.6312499999999943v26.73750000000001q0,1.6312499999999943 -1.6312499999999943,1.6312499999999943h-1.6Z" fill="var(--grey)"></path><text x="455.3" y="438.5" font-size="21"><tspan fill="var(--ink-2)">+60</tspan></text></svg></template>
+<template id="svg-geriatri"><svg viewBox="0 0 1000 524" width="100%" style="display: block; height: auto" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" role="img" aria-label="Mřížka 1 000 čtverečků, jeden čtvereček je jeden geriatr: 232 zůstává aktivních, asi 116 odchází do pěti let do důchodu, nejméně 650 chybí.">
+<defs>
+<pattern id="gerAktivni" x="0" y="64" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="16" height="16" rx="2" fill="var(--accent)"></rect></pattern>
+<pattern id="gerOdchazi" x="0" y="64" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="16" height="16" rx="2" fill="var(--accent-light)"></rect></pattern>
+<pattern id="gerChybi" x="0" y="64" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="3" y="3" width="14" height="14" rx="2" fill="none" stroke="var(--grey)" stroke-width="2"></rect></pattern>
+</defs>
+<text x="0" y="26" font-size="22" font-weight="600" fill="var(--ink)">potřebujeme přes 1 000</text>
+<path d="M1,52V44H999V52" fill="none" stroke="var(--ink)" stroke-width="2"></path>
+<rect x="0" y="64" width="220" height="400" fill="url(#gerAktivni)"></rect>
+<rect x="220" y="64" width="20" height="240" fill="url(#gerAktivni)"></rect>
+<rect x="220" y="304" width="20" height="160" fill="url(#gerOdchazi)"></rect>
+<rect x="240" y="64" width="100" height="400" fill="url(#gerOdchazi)"></rect>
+<rect x="340" y="64" width="20" height="160" fill="url(#gerOdchazi)"></rect>
+<rect x="340" y="224" width="20" height="240" fill="url(#gerChybi)"></rect>
+<rect x="360" y="64" width="640" height="400" fill="url(#gerChybi)"></rect>
+<path d="M1,470V478H348V470" fill="none" stroke="var(--accent-ink)" stroke-width="2"></path>
+<text x="0" y="508" font-size="22" font-weight="600" fill="var(--accent-ink)">máme asi 350</text>
+<text x="1000" y="508" text-anchor="end" font-size="18" font-family="JetBrains Mono, monospace" fill="var(--ink-3)">1 čtvereček = 1 geriatr</text>
+</svg></template>
+
+<script>
+const BARRIERS = [
+  {
+    id: "demografie", k: "A", short: "Demografie",
+    title: "Demografický a kapacitní kolaps",
+    lede: "Počet lidí nad 80 let prudce roste a dnešní model postavený na nemocnicích a lůžkách na to nestačí.",
+    big: "824 tis.", bigCap: "lidí ve věku 80+ v roce 2035 (dnes 520 tis.)",
+    facts: [
+      "Do roku 2035–2040 populace ve věku 80+ a 85+ výrazně vzroste, <strong>z 520 000 na zhruba 824 000</strong>.",
+      "Stávající hospitalo-centrický model je neudržitelný. Pro pokrytí nárůstu by stát musel vybudovat <strong>34 700 nových pobytových lůžek</strong>, což odpovídá zhruba 10 velkým fakultním nemocnicím.",
+      "V roce 2035 bude na pokrytí rostoucích potřeb třeba dalších <strong>~90 mld. Kč</strong>, ~28 tisíc lůžek dlouhodobé sociální péče a až ~48 tisíc pracovníků v sociálních službách.",
+      "V systému dnes chybí přibližně <strong>1 000 geriatrů</strong> a 30 % zdravotních sester je v důchodovém věku. Do roku 2050 bude v sektoru péče potřeba dvojnásobný podíl celkové pracovní síly."
+    ],
+    subs: [
+      { id: "demografie-populace", fact: 0, short: "Populace 80+", t: "Demografický zlom 2027–2037" },
+      { id: "demografie-pece", fact: 1, short: "Pečovatelská práce", t: "Kdo se postará o stárnoucí Česko?" },
+      { id: "demografie-geriatri", fact: 3, short: "Geriatři", t: "Potřebujeme přes 1 000 geriatrů" }
+    ],
+    stats: [["34 700", "nových pobytových lůžek"], ["90 mld.", "Kč navíc ročně v roce 2035"], ["48 tis.", "pracovníků v sociálních službách"], ["1 000", "chybějících geriatrů"]],
+    related: [4, 6]
+  },
+  {
+    id: "pecujici", k: "B", short: "Pečující",
+    title: "Socioekonomická zranitelnost neformálních pečujících",
+    lede: "Péči v Česku z velké části nesou rodiny. Platí za to příjmem, zdravím a budoucím důchodem.",
+    big: "80 %", bigCap: "veškeré péče poskytují neformální pečující",
+    facts: [
+      "Systém drží nad vodou cca <strong>800 000 neformálních pečujících</strong>, kteří poskytují až 80 % veškeré péče. Ročně odvedou přes <strong>181 milionů ošetřovacích dnů</strong>.",
+      "Péče míří hlavně k seniorům. Lidé ve věku 80+ tvoří <strong>43 %</strong> všech opečovávaných, dalších 15 % tvoří lidé ve věku 50–69 let.",
+      "Genderová past a chudoba: <strong>80 % pečujících jsou ženy</strong>. Odchod z trhu práce znamená okamžitý propad příjmů rodiny a nízký důchod. Průměrný starobní důchod žen v roce 2026 je odhadem 19 600–19 900 Kč.",
+      "Syndrom sendvičové generace: Husákovy děti budou v roce 2035 ve věku 60–65 let. Budou pracovat na plný výkon kvůli posunu důchodového věku k 67 letům a zároveň pečovat o rodiče 85+ i podporovat vlastní děti. Výsledkem je vyhoření a soucitná únava.",
+      "Izolace a samota zvyšují mortalitu srovnatelně s kouřením 15 cigaret denně. Pečující mají o <strong>23 % vyšší výskyt kardiovaskulárních onemocnění</strong>. Včasná intervence u seniorů prodlužuje soběstačnost a život ve vlastním domově."
+    ],
+    subs: [
+      { id: "pecujici-cas", fact: 0, short: "Čas péče", t: "Příspěvek zaplatí méně než polovinu hodin péče" },
+      { id: "pecujici-sendvic", fact: 3, short: "Sendvičová generace", t: "Pečují o rodiče, i když je jim kolem 70" },
+      { id: "pecujici-prace", fact: 2, short: "Péče, nebo práce", t: "Každý čtvrtý pečující musel omezit práci" },
+      { id: "pecujici-zeny", fact: 2, short: "Ženy a důchod", t: "Péče padá hlavně na ženy" },
+      { id: "pecujici-zdravi", fact: 4, short: "Zdraví pečujících", t: "Každému čtvrtému se zhoršilo duševní zdraví" }
+    ],
+    stats: [["800 tis.", "neformálních pečujících"], ["181 mil.", "ošetřovacích dnů ročně"], ["80 %", "pečujících jsou ženy"], ["+23 %", "kardiovaskulárních onemocnění"]],
+    related: [2, 5]
+  },
+  {
+    id: "finance", k: "C", short: "Finance a legislativa",
+    title: "Finanční a legislativní brzdy",
+    lede: "Chybí pojištění dlouhodobé péče, příspěvky nestačí a zastaralé předpisy tlačí rodiny do šedé zóny.",
+    big: "14 800 Kč", bigCap: "příspěvek na péči ve III. stupni. Bezpečná péče 24/7 vyžaduje doplatek 20–40 tis. Kč měsíčně",
+    facts: [
+      "Chybí systémové <strong>pojištění dlouhodobé péče</strong>. Příspěvek na péči je často vnímán jako rodinný příjem kompenzující výpadek mzdy, ne jako rozpočet na nákup profesionálních nebo odlehčovacích služeb.",
+      "Když senior ve III. stupni (těžká závislost) žije sám a nemá nikoho blízkého, je <strong>14 800 Kč</strong> na bezpečnou terénní péči 24/7 naprosto nedostačující. Doplatky z úspor či důchodu se pohybují často v řádu 20–40 tisíc Kč měsíčně.",
+      "Regulační šedá zóna: rodiny nakupují <strong>neregistrované technologie</strong> (levné kamery a senzory) bez garance ochrany dat a najímají na černo migrantskou pracovní sílu.",
+      "Neregistrované pečovatelské domy: Veřejný ochránce práv zahájil novou sérii systematických návštěv zařízení poskytujících péči bez oprávnění. Špatné zacházení bylo v minulosti zjištěno ve všech kontrolovaných případech.",
+      "Zastaralá <strong>vyhláška č. 388/2011 Sb.</strong> neumožňuje úhradu moderních asistivních technologií (radary, AI monitoring). Ty často nesplňují ani definici zdravotnického prostředku, propadají mezi zdravotním a sociálním systémem a rodiny si je hradí samy."
+    ],
+    subs: [
+      { id: "finance-seda-zona", fact: 2, also: [4], short: "Šedá zóna péče", t: "Kde systém nestačí, vzniká šedá zóna" },
+      { id: "finance-nelegalni", fact: 3, short: "Péče, kterou nikdo nehlídá", t: "Nelegální domovy pro seniory fungují dál" }
+    ],
+    related: [3, 1]
+  },
+  {
+    id: "obce", k: "D", short: "Obce",
+    title: "Rozdrobené obce, reforma společenství obcí",
+    lede: "Malé obce nemají kapacitu zajistit sociální služby. Reforma společenství obcí (SO) je příležitost to změnit.",
+    big: "< 500", bigCap: "obyvatel má většina českých obcí",
+    facts: [
+      "Česko má <strong>nejmenší obce z celé EU</strong>, většina z nich má méně než 500 obyvatel.",
+      "Obce nezvládají agendy vzdělávání a sociálních služeb.",
+      "Reforma společenství obcí (SO) otevírá prostor pro sdílení agend péče mezi obcemi."
+    ],
+    subs: [
+      { id: "obce-velikost", fact: 0, short: "13× menší obec", t: "Česká obec je 13× menší než evropská" },
+      { id: "obce-kilometry", fact: 1, short: "Péče stojí kilometry", t: "Péče do malých obcí stojí kilometry" },
+      { id: "obce-posledni-ves", fact: 1, also: [2], short: "Poslední ves", t: "Kdo dojede do poslední vsi?" }
+    ],
+    related: [1, 4]
+  }
+];
+
+const CHALLENGES = [
+  {
+    n: 1, short: "Navigace",
+    title: "Navigace a koordinace péče",
+    sub: "Case management a Care-OS",
+    hmw: "Jak bychom mohli sjednotit fragmentovaný systém sociálně-zdravotní péče tak, aby neformální pečující nemuseli fungovat jako <em>vyčerpaní administrátoři</em>, ale měli k dispozici jeden přehledný bod pravdy a podpory?",
+    why: [
+      "Pečující se dnes ztrácejí ve složitém systému. Nevědí, na co mají nárok ani jak kombinovat služby. Zásadním problémem je chybějící multidisciplinární koordinace péče na úrovni obcí s rozšířenou působností (ORP).",
+      "Vize roku 2035 vyžaduje zavedení pečo-koordinátorů (case managerů) a jednotného, technologicky agnostického informačního standardu Care-OS. Ten umožní bezpečné sdílení plánů péče, cílů a varování mezi rodinou, terénními službami a zdravotníky."
+    ],
+    sources: ["Příprava na stárnutí populace do r. 2035", "Starnuti-populace-pecovatelska-sluzba", "Systemova-opatreni-pro-podporu-osob-s-intelektovym-znevyhodnenim"],
+    link: ["Mapa aktérů", "https://drive.google.com/open?id=1simSF8luVu9qPCjxK483BezZ_lVAs8j3&usp=drive_fs"],
+    barriers: ["finance", "obce"]
+  },
+  {
+    n: 2, short: "Sendvičová generace",
+    title: "Udržitelnost sendvičové generace a ekonomická ochrana",
+    hmw: "Jak bychom mohli ochránit generaci Husákových dětí před finančním a fyzickým kolapsem, aby péče o stárnoucí rodiče (85+) <em>nevedla k jejich vlastní chudobě</em> a nucenému odchodu z trhu práce?",
+    why: [
+      "Hlavní tíhu péče v roce 2035 ponesou lidé narození v 70. letech. Budou pod extrémním tlakem péče o dožívající rodiče a zároveň podpory vlastních dětí.",
+      "Odchod z trhu práce kvůli péči znamená okamžitý propad příjmů a nižší vyměřovací základ pro vlastní důchod. Tato penalizace má genderový dopad, protože cca 80 % péče zajišťují ženy.",
+      "Výzva spočívá v legislativním a systémovém zakotvení podpory, například fiktivního vyměřovacího základu důchodu ve výši 100 % průměrné mzdy nebo ošetřovatelského částečného úvazku s dorovnáním mzdy."
+    ],
+    sources: ["Budoucí péče o seniory v ČR", "STEEP analýza", "Stárnutí populace a péče: Predikce dopadů"],
+    barriers: ["pecujici", "demografie"]
+  },
+  {
+    n: 3, short: "Technologie a AI",
+    title: "Eliminace technologické šedé zóny a bezpečná implementace AI",
+    hmw: "Jak bychom mohli vytvořit agilní certifikační a úhradový rámec pro asistivní technologie a chytrá zařízení, aby rodiny <em>nebyly nuceny spoléhat na neověřené produkty</em> z e-commerce bez ochrany dat a soukromí?",
+    why: [
+      "Kvůli nedostupnosti profesionální terénní péče a zdlouhavé legislativě sahají rodiny po neověřených řešeních, například čínských senzorech z AliExpressu nebo neregistrovaných monitorovacích aplikacích. Vzniká nebezpečná regulační šedá zóna.",
+      "Systém do roku 2035 musí nabídnout legislativně ukotvené a proplácené nástroje (obdoba německého systému DiPA). Ty ochrání soukromí seniorů, třeba neinvazivními 4D radary místo kamer, a jasně vymezí právní odpovědnost při selhání technologie či využití prediktivní AI."
+    ],
+    sources: ["03_seda_asistence", "Technologie pro péči o seniory 2035", "04_wearables"],
+    barriers: ["finance"]
+  },
+  {
+    n: 4, short: "Komunitní péče",
+    title: "Decentralizace a komunitní modely péče",
+    sub: "Care Credits",
+    hmw: "Jak bychom mohli transformovat infrastrukturu péče tak, aby nespoléhala výhradně na nedostatečné lůžkové kapacity, ale <em>chytře motivovala a odměňovala</em> komunitní a sousedskou výpomoc?",
+    why: [
+      "Predikce ukazují, že do roku 2035 bude v ČR potřeba přibližně 34 700 nových pobytových lůžek. To je finančně i personálně nerealizovatelné.",
+      "Je nutné posílit terénní a odlehčovací služby, které pečujícím dají možnost odpočinku (respite care). Designovou výzvou jsou inovační modely: časové banky, pečovatelské kredity s interoperabilitou mezi obcemi a legální, pojištěné mikro-úvazky pro sousedskou výpomoc."
+    ],
+    sources: ["Příprava na stárnutí populace do r. 2035", "Budoucí péče o seniory v ČR", "Stárnutí populace a péče: Predikce dopadů"],
+    barriers: ["demografie", "obce"]
+  },
+  {
+    n: 5, short: "Zdraví pečujících",
+    title: "Proaktivní prevence duševního a fyzického zdraví pečujících",
+    hmw: "Jak bychom mohli systematicky chránit fyzické a duševní zdraví neformálních pečujících <em>dříve, než dojde ke krizovému zhroucení</em>, které následně způsobí kolaps domácí péče?",
+    why: [
+      "Neformální pečující mají až o 23 % vyšší výskyt kardiovaskulárních onemocnění. Prevalence deprese u nich dosahuje 32–50 %, v obecné populaci 15–20 %.",
+      "Když se pečující psychicky nebo fyzicky zhroutí (compassion fatigue, burn-out), opečovávaný senior končí v drahé institucionální péči.",
+      "Výzvou je vytvořit preventivní programy, garantované odlehčovací dny a využít digitální terapeutika (např. digitální KBT pod supervizí) jako legitimní a hrazenou součást podpory rodin."
+    ],
+    stat: ["32–50 %", "prevalence deprese u pečujících (obecná populace 15–20 %)"],
+    sources: ["06_preventivni_medicina_telemedicina", "Technologie pro péči o seniory 2035", "Národní plán podpory rovných příležitostí…"],
+    barriers: ["pecujici"]
+  },
+  {
+    n: 6, short: "Zdravé stárnutí",
+    title: "Investice do prevence a zdravého stárnutí",
+    hmw: "Jaké mechanismy systémové transformace jsou nezbytné pro přechod <em>od reaktivní léčby k proaktivní podpoře soběstačnosti</em> seniorů a jakou roli v tom hraje motivace jednotlivce pečovat o vlastní zdraví?",
+    why: [
+      "Doba dožití ve zdraví je v ČR výrazně nižší než v západní Evropě, kolem 62 let. To je bod zlomu, kdy se lidé z plátců systému stávají příjemci péče.",
+      "Investiční nepoměr: do prevence jde v ČR zhruba 1–3 % celkových výdajů na zdravotnictví. Zbytek spolkne hašení požárů, tedy léčba chronických onemocnění.",
+      "Fiskální udržitelnost: pokud se nepodaří prodloužit soběstačnost a oddálit nástup do III. a IV. stupně závislosti, náklady na péči o seniory se do roku 2050 mohou zdvojnásobit."
+    ],
+    stat: ["62 let", "průměrná doba dožití ve zdraví v ČR"],
+    barriers: ["demografie"]
+  }
+];
+
+// Podněty ze střednědobých plánů rozvoje sociálních služeb (SPRSS) 14 krajů. `on` = stránky, kde se karta zobrazí.
+const KRAJE = [
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "Kapacity spočítané modelem až do roku 2035", d: "Kraj počítá potřebné kapacity matematickým modelem s výhledem do roku 2035. Podle modelu bude potřebovat až 968 lůžek v domovech pro seniory.", rel: "Stejný horizont jako CARE 2035. I kraj, který dává přednost terénní péči, podle modelu počítá s dalšími lůžky.", on: ["demografie", "demografie-populace"] },
+  { type: "Problém", kraj: "Středočeský kraj", t: "Výhled do roku 2050 se nepodařilo získat", d: "Kraj chtěl dlouhodobý výhled potřeb na roky 2025–2050, ale dodavatel ho nedodal. Většina krajů plánuje jen na tři roky dopředu.", rel: "Demografický zlom 2027–2037 přesahuje tříleté plánovací období. Krajům chybí analytická kapacita na dlouhý výhled.", on: ["demografie", "demografie-populace"] },
+  { type: "Problém", kraj: "Královéhradecký kraj", t: "Senioři: 51 % kapacit a 86 % uživatelů péče", d: "Služby pro seniory už dnes tvoří polovinu kapacit sociálních služeb v kraji a připadá na ně drtivá většina uživatelů péče.", rel: "Nárůst lidí 80+ dopadne na segment, který je už teď největší.", on: ["demografie-populace"] },
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "Měřitelná garance pobytové péče", d: "Domovy pro seniory mají pokrýt 20 % příjemců příspěvku na péči ve III. a IV. stupni, domovy se zvláštním režimem 15 %. Jiný kraj takový závazek nemá.", rel: "Příklad, jak převést demografický tlak na konkrétní a kontrolovatelný cíl kapacit.", on: ["demografie"] },
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "Mzdový standard nad tarify", d: "Jako jediný kraj navrhuje konkrétní mzdový standard, o 20 % nad výchozí tarify u služeb pro lidi s autismem a náročným chováním. K tomu kariérní řády a náborovou strategii.", rel: "Přímá odpověď na nízké ohodnocení pečovatelské práce. V ostatních plánech zůstává odměňování obecným přáním.", on: ["demografie-pece"] },
+  { type: "Inovace", kraj: "Královéhradecký kraj", t: "Technologie, které šetří lidskou práci", d: "Kraj otevřeně počítá s asistenčními technologiemi, které mohou ušetřit práci pracovníků. Nedostatek personálu neřeší jen nábory.", rel: "Propojuje personální krizi s <b>výzvou 3</b> o bezpečném nasazení asistivních technologií.", on: ["demografie-pece", "vyzva-3"] },
+  { type: "Inovace", kraj: "Olomoucký kraj · Kraj Vysočina", t: "Dobrovolnictví jako součást systému", d: "Dobrovolnická centra jsou v obou krajích plnohodnotnou součástí sociálních služeb. Jiné kraje dobrovolnictví nezmiňují.", rel: "Základ, na kterém mohou stát pečovatelské kredity a sousedská výpomoc z <b>výzvy 4</b>.", on: ["demografie-pece", "vyzva-4"] },
+  { type: "Inovace", kraj: "Kraj Vysočina", t: "Telemedicína tam, kde chybí lékař", d: "Kraj zavádí telemedicínu pro pobytová zařízení bez praktického lékaře a sdílený software pro půjčovny kompenzačních pomůcek.", rel: "Způsob, jak zmírnit nedostatek lékařů a rozšířit dostupnost péče bez nových kapacit.", on: ["demografie-geriatri", "vyzva-3", "vyzva-6"] },
+  { type: "Inovace", kraj: "Olomoucký kraj · Královéhradecký kraj", t: "Paliativní a hospicová péče jako priorita", d: "Olomoucký kraj měl jako jeden z prvních samostatnou Koncepci paliativní péče. Královéhradecký kraj povýšil hospicovou péči na samostatnou prioritu.", rel: "Mobilní paliativní týmy jsou podmínkou cíle, aby až 30 % lidí v terminální fázi mohlo zůstat doma.", on: ["demografie-geriatri"] },
+  { type: "Inovace", kraj: "Liberecký · Moravskoslezský · Olomoucký kraj", t: "Multidisciplinární tým kolem člověka", d: "Propojení zdravotní a sociální péče stojí na case managementu: jeden koordinátor a více profesí kolem klienta.", rel: "Stejný princip jako komplexní geriatrická péče a jádro koordinace z <b>výzvy 1</b>.", on: ["demografie-geriatri", "vyzva-1"] },
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "Krajský case manager", d: "Kraj zřizuje pozici krajského case managera, který metodicky vede sociální pracovníky obcí. V jiných plánech tato role v takové podobě není.", rel: "Konkrétní podoba pečo-koordinátora z <b>výzvy 1</b>, zatím na úrovni kraje, ne každé ORP.", on: ["vyzva-1", "obce"] },
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "Databáze Unikátní žadatel", d: "Jeden žadatel je evidovaný napříč všemi pobytovými službami, aby kraj věděl, kolik lidí skutečně čeká.", rel: "Zárodek jednoho bodu pravdy o potřebách péče, na který cílí Care-OS.", on: ["vyzva-1"] },
+  { type: "Inovace", kraj: "Kraj Vysočina · Liberecký kraj", t: "Krajská data a portál pro pečující", d: "Vysočina buduje datový sklad kraje a portál „Vysočina pečuje“. Liberecký kraj řídí síť služeb přes informační systém KISSOS.", rel: "Krajské stavební kameny pro Care-OS a národní registr služeb v reálném čase.", on: ["vyzva-1"] },
+  { type: "Inovace", kraj: "Liberecký kraj", t: "Pečující jako samostatný strategický cíl", d: "„Zlepšit postavení pečujících osob a rodiny“ je samostatný cíl D, včetně jejich sociálně-finančního zabezpečení. Praha a Olomoucký kraj mají pro pečující samostatnou oblast opatření.", rel: "Krajský protějšek statusu pečujícího a ochrany příjmů z <b>výzvy 2</b>.", on: ["pecujici", "vyzva-2"] },
+  { type: "Problém", kraj: "Zlínský kraj", t: "Odlehčení je nejčastější nepokrytá potřeba", d: "Odlehčení pečujícím bylo vůbec nejčastější prioritní potřebou napříč územími ORP.", rel: "Data z území podporují návrh zákonné garance mikro-odlehčení a prevenci vyhoření z <b>výzvy 5</b>.", on: ["pecujici", "vyzva-5"] },
+  { type: "Inovace", kraj: "Zlínský kraj", t: "Denní stacionáře, aby pečující mohli pracovat", d: "Kraj rozvíjí denní stacionáře výslovně proto, aby pečující mohli dál chodit do práce.", rel: "Konkrétní krok k principu pečovat a pracovat, ne pečovat nebo pracovat.", on: ["pecujici", "vyzva-2"] },
+  { type: "Napětí", kraj: "Královéhradecký kraj", t: "Posilování odpovědnosti rodiny", d: "Jako jediný kraj zdůrazňuje princip odpovědnosti rodiny, včetně spoluúčasti na péči a nákladech i v pobytovém zařízení.", rel: "Jde opačným směrem než ochrana sendvičové generace. Otevřená otázka pro workshop: kolik má nést rodina?", on: ["pecujici", "vyzva-2"] },
+  { type: "Inovace", kraj: "Olomoucký kraj", t: "Podpora pečujících jako úspora", d: "Když rodina zvládne péči doma, klesá tlak na drahé pobytové služby. Kraj proto chápe podporu pečujících i jako ekonomické opatření.", rel: "Stejná logika jako ve <b>výzvě 5</b>: zhroucení pečujícího posílá seniora do instituce.", on: ["vyzva-5"] },
+  { type: "Inovace", kraj: "Karlovarský kraj · Liberecký kraj", t: "Provázení pečujících", d: "Poradenství a provázení pečujících, vzdělávání a psychologická podpora jako samostatné nástroje.", rel: "Hotové stavební prvky pro preventivní programy z <b>výzvy 5</b>.", on: ["vyzva-5"] },
+  { type: "Inovace", kraj: "Jihočeský kraj", t: "Stabilizační varianta pro nedostatek peněz", d: "Jako jediný kraj má pravidlo pro krizi: když peníze klesnou, přednostně se chrání služby, jejichž útlum by ohrozil život a zdraví uživatelů.", rel: "Ukazuje, jak křehké je financování bez pojištění dlouhodobé péče.", on: ["finance"] },
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "Víceleté financování služeb", d: "Cílem je víceleté financování navázané na střednědobý plán, měřené podílem alespoň 70 % poskytovatelů. Jinde převažuje roční dotační cyklus.", rel: "Roční cyklus brání poskytovatelům investovat do lidí i technologií.", on: ["finance"] },
+  { type: "Inovace", kraj: "Liberecký kraj", t: "Financování jako mandatorní výdaj státu", d: "Udržitelné financování je samostatný strategický cíl. Kraj chce posílit roli příspěvku na péči a zakotvit peníze na služby jako mandatorní výdaj.", rel: "Krajský hlas pro systémové řešení, které v bariéře C chybí.", on: ["finance"] },
+  { type: "Problém", kraj: "Olomoucký kraj", t: "Vícezdrojové financování není v zákoně", d: "Pojem vícezdrojové financování podle kraje není ukotven v žádném zákoně. Kraj proto pracuje s principem subsidiarity financování.", rel: "Legislativní mezera stejného typu jako zastaralá vyhláška 388/2011 Sb.", on: ["finance"] },
+  { type: "Inovace", kraj: "Plzeňský kraj", t: "Ověřování, že služba opravdu funguje", d: "Kraj zavádí místní sociální šetření, monitoring a návštěvy, které ověřují reálné fungování služeb, nejen splnění standardů.", rel: "Nástroj proti neregistrovaným zařízením, na která upozorňuje Veřejný ochránce práv.", on: ["finance"] },
+  { type: "Inovace", kraj: "Liberecký kraj", t: "Sjednocení inspekcí a požadavků na kvalitu", d: "Kraj chce upravit systém inspekcí, sjednotit jejich přístup a legislativně vymezit požadavky na kvalitu.", rel: "Stejná potřeba jasných pravidel platí pro certifikaci asistivních technologií ve <b>výzvě 3</b>.", on: ["vyzva-3"] },
+  { type: "Inovace", kraj: "Zlínský kraj", t: "Princip průniku kraje a ORP", d: "Každá ORP vybere nejvýše tři nejdůležitější nepokryté potřeby svého území. Řeší se ty, na kterých se shodne kraj i ORP.", rel: "Funkční model spolupráce kraje s rozdrobenými obcemi bez nových úřadů.", on: ["obce"] },
+  { type: "Inovace", kraj: "Plzeňský kraj", t: "Pečovatelská služba pro malé obce", d: "Kraj podporuje pečovatelskou službu dvěma zvláštními dotačními tituly pro obce. Při rozšiřování sítě vyžaduje od obcí závazek spolufinancování.", rel: "Ukazuje, jak udržet terénní péči i v obcích pod 500 obyvatel.", on: ["obce", "vyzva-4"] },
+  { type: "Inovace", kraj: "Královéhradecký kraj", t: "Vyrovnávací platba jako řídicí nástroj", d: "Kraj ve vyrovnávací platbě zohledňuje péči večer a o víkendu, práci ve dvou, dojíždění do malých obcí i pozici zdravotního konzultanta.", rel: "Peníze motivují služby jít tam, kde péče chybí. Použitelné i pro odměňování komunitní péče.", on: ["obce", "vyzva-4"] },
+  { type: "Inovace", kraj: "Karlovarský kraj", t: "100% pokrytí terénní pečovatelskou službou", d: "Kraj stanovuje cíl pokrýt terénní pečovatelskou službou všechny jmenovitě uvedené obce a zavádí bonifikaci za večerní a víkendovou péči.", rel: "Měřitelný závazek, jak posílit péči doma místo nových lůžek.", on: ["vyzva-4"] },
+  { type: "Inovace", kraj: "Hlavní město Praha", t: "Sdílená péče", d: "Praha rozvíjí sdílenou péči, aby lidé mohli zůstat doma déle bez navyšování klasických kapacit.", rel: "Příbuzný model ke komunitní péči a odlehčení rodin ve <b>výzvě 4</b>.", on: ["vyzva-4"] },
+  { type: "Inovace", kraj: "Kraj Vysočina", t: "Komunitní centra a mezigenerační setkávání", d: "Kraj propojuje podporu pečujících s komunitními centry pro seniory, mezigeneračním setkáváním a dobrovolnictvím.", rel: "Infrastruktura pro sousedskou výpomoc i pro aktivní a zdravé stárnutí.", on: ["vyzva-4", "vyzva-6"] },
+  { type: "Mezera", kraj: "Souhrn 14 krajských plánů", t: "Prevence zdravého stárnutí jako samostatné téma chybí", d: "Souhrn plánů se soustředí na služby pro lidi, kteří už péči potřebují. Prevenci a podporu zdravého stárnutí jako samostatné téma neuvádí.", rel: "<b>Výzva 6</b> otevírá prostor, který krajské plánování sociálních služeb zatím nepokrývá.", on: ["vyzva-6"] }
+];
+const SPRSS = [["Hlavní město Praha", "Střednědobý plán rozvoje sociálních služeb 2025–2027"], ["Jihočeský kraj", "Střednědobý plán rozvoje sociálních služeb 2025–2027"], ["Jihomoravský kraj", "Střednědobý plán rozvoje sociálních služeb 2024–2026"], ["Karlovarský kraj", "návrh Střednědobého plánu rozvoje sociálních služeb (do 2027)"], ["Královéhradecký kraj", "Střednědobý plán rozvoje sociálních služeb 2024–2026 (revize č. 12)"], ["Liberecký kraj", "Střednědobý plán rozvoje sociálních služeb 2024–2026"], ["Moravskoslezský kraj", "Střednědobý plán rozvoje sociálních služeb 2024–2026 (vč. aktualizace č. 2)"], ["Olomoucký kraj", "Střednědobý plán rozvoje sociálních služeb 2024–2026"], ["Pardubický kraj", "Střednědobý plán rozvoje sociálních služeb 2025–2027"], ["Plzeňský kraj", "Střednědobý plán rozvoje sociálních služeb 2026–2028"], ["Středočeský kraj", "Střednědobý plán rozvoje sociálních služeb 2026–2028"], ["Ústecký kraj", "Střednědobý plán rozvoje sociálních služeb 2025–2027"], ["Kraj Vysočina", "Střednědobý plán rozvoje sociálních služeb 2026–2027"], ["Zlínský kraj", "Akční plán 2026 (3. aktualizace)"]];
+
+// Podněty z časopisu Sociální služby (APSS ČR), ročníky 2023–2025. fig = velké číslo nebo symbol.
+const CASOPIS = [
+  { type: "Data", fig: "~30 %", src: "Sociální služby 2024", t: "Sociální služby pečují o téměř třetinu lidí 80+", d: "Podle časopisu se sociální služby v ČR starají zhruba o 30 % všech lidí starších 80 let.", pro: "Odhad je vyšší než 24 % z grafu výše. Každý zdroj počítá klienty jinak, pro výpočty je potřeba sjednotit definici.", on: ["demografie-populace"] },
+  { type: "Data", fig: "76 %", src: "EU Care Strategy, 2024", t: "Poměr potřebujících a pečujících v roce 2050", d: "Poměr lidí potřebujících péči k těm, kdo ji mohou poskytovat, má do roku 2050 dosáhnout zhruba 76 %. Už dnes 14 milionů Evropanů potřebuje dlouhodobou péči a nevyužívá žádnou službu.", pro: "Evropský rámec pro český demografický zlom: problém není jen v počtu seniorů, ale v počtu rukou.", on: ["demografie-populace", "demografie"] },
+  { type: "Spor", fig: "⇄", sym: true, src: "RILSA · Sociální služby 2024–2025", t: "Stárnutí není demografická bomba", d: "Výzkumníci RILSA odmítají rámování stárnutí jako hrozby a označují ho za ageistické. Stárnutí popisují jako kolektivní úspěch a příležitost pro investice do zdraví a vzdělání.", pro: "Tento web mluví o kolapsu a zlomu. Na workshopu stojí za to hlídat, aby rámování krize nevedlo k pohledu na seniory jen jako na zátěž.", on: ["demografie", "vyzva-6"] },
+  { type: "Data", fig: "3 000+", src: "APSS ČR, 1/2025", t: "Chybí přes 3 000 pracovníků, fluktuace 18 %", d: "Šetření v 625 zařízeních: v sektoru chybí přes 3 000 lidí, nejvíc pracovníků v sociálních službách. Fluktuace v přímé péči je 18 %, v některých krajích až 26 %. Personál stárne rychleji než zbytek pracovní síly.", pro: "Dnešní výchozí bod pro odhad 28 400 úvazků navíc do roku 2035.", on: ["demografie-pece"] },
+  { type: "Data", fig: "31 %", src: "APSS ČR + IRESOFT, 2025", t: "Smysluplná práce, špatný plat", d: "Průzkum mezi 14 245 zaměstnanci: 90 % vnímá svou práci jako smysluplnou, 83 % je spokojeno s její náplní, ale jen 31 % je spokojeno s platem.", pro: "Lidé v oboru zůstávají kvůli smyslu, odcházejí kvůli penězům. Mzda je největší páka pro nábor.", on: ["demografie-pece"] },
+  { type: "Zákon", fig: "180", src: "Veřejný ochránce práv · zákon č. 38/2025 Sb.", t: "Závazný personální standard neprošel", d: "Novela zákona o sociálních službách minimální personální standard nakonec nezakotvila. Ombudsman uvádí krajní případ: 2–3 pracovníci na noční směně pro více než 180 klientů bez zdravotníka. Poskytovatelé si proto spustili vlastní kalkulačku personalnistandard.cz.", pro: "Bez standardu nelze potřebu personálu do roku 2035 ani vymáhat, ani spolehlivě spočítat.", on: ["demografie-pece"] },
+  { type: "Inovace", fig: "20", src: "Rakousko · Sociální služby 2023", t: "Rakouská reforma „20 opatření“ pro pracovníky", d: "Balík za 1 miliardu eur: platové bonusy, týden dovolené navíc pro pečující profese, stipendia pro studenty oboru a rozšíření kompetencí asistentů.", pro: "Hotový zahraniční model, jak zatraktivnit pečovatelskou práci celostátně.", on: ["demografie-pece"] },
+  { type: "Data", fig: "40 %", src: "Holmerová a kol. · Sociální služby 1/2025", t: "Deprese u klientů domovů se přehlíží", d: "Mírná deprese byla zjištěna u 40 % klientů domovů pro seniory, těžká u 15 %. Ombudsman zjistil, že zařízení depresi a bolest systematicky nesledují a depresi zaměňují s počínající demencí. Psychologa na alespoň poloviční úvazek má jen 6 z 205 dotázaných domovů.", pro: "Nechybí jen geriatři. Chybí celá gerontologická odbornost, včetně psychologů a standardizovaných škál.", on: ["demografie-geriatri"] },
+  { type: "Zákon", fig: "0,2", src: "Zákon o sociálně-zdravotním pomezí, 2025", t: "Sociálně-zdravotní lůžka s lékařem", d: "Nový zákon zavádí sociálně-zdravotní lůžka s povinným úvazkem 0,2 praktického lékaře a roli nezdravotnického pracovníka v terénu. Zákon platí od března 2025, ale prováděcí vyhlášky ke standardům chybějí.", pro: "První zákonný most mezi MZd a MPSV. Bez vyhlášek ale poskytovatelé nevědí, co mají splnit.", on: ["demografie-geriatri", "vyzva-1"] },
+  { type: "Data", fig: "⌂", sym: true, src: "Sociální služby 2024–2025", t: "Víc lidí umírá doma a v sociálních službách", d: "Nejčastějším místem úmrtí zůstává nemocnice, ale doma a v sociálních službách se umírá častěji než dříve. APSS ČR nabízí certifikaci paliativního přístupu v sociálních službách.", pro: "Posiluje cíl, aby až 30 % lidí v terminální fázi zůstalo doma. Geriatrická a paliativní péče se musí dostat za lidmi.", on: ["demografie-geriatri"] },
+  { type: "Data", fig: "1,2 mil.", src: "Sociální služby 2025", t: "K neformální péči se hlásí přes 1,2 milionu lidí", d: "V roce 2019 se k neformální péči hlásilo asi 900 tisíc lidí, v roce 2023 už přes 1,2 milionu. Růst táhne stárnutí a nedostatek pobytových kapacit.", pro: "Číslo je výrazně vyšší než 800 000 pečujících v našem výchozím stavu. Zdroje se liší definicí pečujícího, rozdíl je potřeba vysvětlit.", on: ["pecujici"] },
+  { type: "Zákon", fig: "§", sym: true, src: "Zákon o sociálních službách, 2023", t: "Neformální pečující má zákonnou definici", d: "Od roku 2023 zákon o sociálních službách definuje neformálního pečujícího. Je to předpoklad, na který lze navázat další formy podpory.", pro: "Základní kámen pro status pečujícího z <b>výzvy 2</b>. Definice existuje, chybějí práva a podpora, které by na ni navázaly.", on: ["pecujici", "vyzva-2"] },
+  { type: "Spor", fig: "⇄", sym: true, src: "Eurofound vs. APSS ČR, 2025", t: "Pečujeme z povinnosti, nebo z volby?", d: "Studie Eurofound tvrdí, že neplacenou péči motivuje spíš povinnost a společenské normy, a navrhuje zvýšit podíl mužů na péči. Prezident APSS ČR s tím polemizuje a prosazuje svobodné rozhodování rodin.", pro: "80 % pečujících jsou ženy. Obor se neshodne, zda to aktivně měnit. Hodnotová otázka pro workshop.", on: ["pecujici"] },
+  { type: "Data", fig: "10–39 %", src: "EU · Sociální služby 2025", t: "Neplacená péče má hodnotu až desítek procent HDP", d: "V EU poskytuje neplacenou péči 45 % obyvatel a ženy odvedou 76 % této práce. Zpeněžená péče by představovala 10–39 % HDP.", pro: "Argument pro ekonomickou ochranu pečujících: stát dnes tuto hodnotu dostává zadarmo.", on: ["pecujici", "vyzva-2"] },
+  { type: "Inovace", fig: "1 500 €", src: "Rakousko · Sociální služby 2023", t: "Rakousko platí rodinám bonus a náhradní péči", d: "Roční bonus 1 500 eur pro rodinné pečující od IV. stupně, příspěvek na náhradní péči už po 3 dnech místo 7, pečovatelská dovolená a bezplatné kurzy a konzultace.", pro: "Konkrétní balík, který přesně odpovídá <b>výzvám 2 a 5</b>: peníze, odlehčení i prevence.", on: ["vyzva-2", "vyzva-5"] },
+  { type: "Data", fig: "40 %", src: "Liberecký kraj · Sociální služby 2025", t: "Péče poškozuje zdraví pečujících", d: "40 % neformálních a 35 % formálních pečujících uvedlo, že péče negativně ovlivnila jejich zdraví. Největší zátěží je pomoc s pohybem a hygienou.", pro: "Konkrétní místa, kde může prevence začít: školení v manipulaci, pomůcky a odlehčení právě u mobility a hygieny.", on: ["vyzva-5"] },
+  { type: "Inovace", fig: "✓", sym: true, src: "Sociální služby 2025", t: "Mapovat zátěž pečujících dřív, než vyhoří", d: "Obor se shoduje, že „prioritou kvality péče je kvalitní pečující“, a doporučuje nástroje na pravidelné mapování zátěže pečujících.", pro: "Screening zátěže je jednoduchý první prototyp pro <b>výzvu 5</b>.", on: ["vyzva-5"] },
+  { type: "Data", fig: "880 Kč", src: "Sociální služby 2024", t: "Příspěvek na péči nestíhá inflaci", d: "U dospělých v I. stupni klesl příspěvek z 2 000 Kč (2007) na 880 Kč a nestačí ani na 6 hodin osobní asistence měsíčně. Zákon nemá valorizační mechanismus, každé zvýšení vyžaduje nový zákon.", pro: "Druhá strana problému z bariéry C: příspěvek nestačí nejen ve III. stupni, ale ztrácí hodnotu v celém systému.", on: ["finance"] },
+  { type: "Problém", fig: "1 rok", src: "Úvodník „Fikce stability“, 5/2025", t: "Jednoleté dotace bez nároku", d: "Služby každý rok znovu žádají o dotace a nevědí, zda peníze přijdou. Nemohou tvořit rezervy ani stabilní týmy. Časopis to přirovnává ke škole, která v lednu neví, zda v září otevře.", pro: "Za poslední tři roky šlo do služeb přes 82 mld. Kč, přesto bez jistoty. Obor navrhuje víceleté financování.", on: ["finance"] },
+  { type: "Zákon", fig: "300 tis.", src: "Zákon č. 38/2025 Sb. · projekt FEANCI", t: "Nový přestupek „špatné zacházení“", d: "Od roku 2026 musí poskytovatelé chránit soukromí a důstojnost klientů a za špatné zacházení hrozí pokuta až 300 000 Kč. Výzkum FEANCI ukazuje, že špatné zacházení se objevuje ve všech typech a velikostech zařízení.", pro: "Nástroj proti zneužívání, na které ombudsman narazil v neregistrovaných zařízeních. Záleží na vymáhání.", on: ["finance"] },
+  { type: "Problém", fig: "1,2 mil.", src: "Sociální služby 2024", t: "Pečovatelky „live-in“ v šedé zóně", d: "V EU pracuje až 1,2 milionu pečovatelek, které bydlí u klienta, v neregulované šedé zóně.", pro: "Evropský rozměr černé migrantské práce, kterou popisuje bariéra C.", on: ["finance"] },
+  { type: "Spor", fig: "⇄", sym: true, src: "P. Čáslava · Sociální služby 1/2025", t: "„Černá listina“ úkonů pečovatelské služby", d: "Po přechodu financování na kraje se úkony jako dovoz obědů, úklid a praní ocitly mimo podporu, protože jsou dostupné komerčně. Etik upozorňuje, že chudí a venkovští senioři si komerční služby dovolit nemohou.", pro: "V malých obcích komerční alternativa často vůbec není. Tyto úkony může převzít sousedská výpomoc a pečovatelské kredity z <b>výzvy 4</b>.", on: ["obce", "vyzva-4", "finance"] },
+  { type: "Inovace", fig: "3 → 1", src: "Sociální služby 2025", t: "Sloučit tři terénní služby do jedné", d: "Z praxe zaznívá návrh sloučit osobní asistenci, pečovatelskou a terénní odlehčovací službu, protože mají podobné úkony a zbytečnou administrativu. Zatím se neprosadil.", pro: "Méně škatulek znamená jednodušší navigaci pro rodiny i menší zátěž malých poskytovatelů.", on: ["obce", "vyzva-1"] },
+  { type: "Data", fig: "1/5", src: "Sociální služby 2024–2025", t: "Lidé nečerpají dávky, na které mají nárok", d: "Příspěvek na bydlení čerpá jen asi pětina oprávněných. Důvodem je složitost žádostí, špatná orientace a stigma. Časopis řešil i to, kolik lidí vůbec nežádá o příspěvek na péči.", pro: "Důkaz, že bez navigace a koordinace nárok nestačí. Jádro <b>výzvy 1</b>.", on: ["vyzva-1"] },
+  { type: "Inovace", fig: "✓", sym: true, src: "Sociální služby 2025", t: "Certifikační autorita pro asistivní technologie", d: "Obor zvažuje zřízení certifikační autority, která by zaručila kvalitu pomůcek. Organizace Dohled na dosah nabízí akreditovaný kurz využívání asistivních technologií.", pro: "Přímo odpovídá na certifikační a úhradový rámec z <b>výzvy 3</b>.", on: ["vyzva-3"] },
+  { type: "Inovace", fig: "+", sym: true, src: "Sociální služby 2025", t: "Vzorové pokoje a bezdotykový monitoring", d: "Centra asistivních technologií se vzorovými pokoji s otestovanými pomůckami, mobilní hospic s bezdotykovým monitoringem pacientů a nizozemský Tovertafel pro aktivizaci lidí s demencí.", pro: "Místa, kde si rodiny mohou technologie vyzkoušet dřív, než je koupí na e-shopu.", on: ["vyzva-3"] },
+  { type: "Spor", fig: "⇄", sym: true, src: "Sociální služby 2024–2025", t: "Bezpečí, nebo soukromí?", d: "Nositelná SOS zařízení a detekce pádu soukromí neporušují, kamery v pokojích narážejí na důstojnost a GDPR. Telemedicína je pro seniory s demencí obtížná a nadšení z tabletů po covidu opadlo.", pro: "Technologie mají lidský kontakt doplnit, ne nahradit. Kritérium pro certifikaci ve <b>výzvě 3</b>.", on: ["vyzva-3"] },
+  { type: "Spor", fig: "⇄", sym: true, src: "APSS ČR, 3/2025", t: "Stavět domovy, nebo posílit terén?", d: "Viceprezidentka APSS pro terénní služby tvrdí, že řešením není výstavba nových domovů, ale enormní podpora terénních služeb. Jiní upozorňují na nízké kapacity pobytových služeb a tlak na místa.", pro: "Přesně otázka <b>výzvy 4</b>: 34 700 nových lůžek, nebo péče v komunitě.", on: ["vyzva-4"] },
+  { type: "Data", fig: "40 %+", src: "Sociální služby 2025", t: "Senioři pomáhají mimo trh", d: "Dobrovolnictví a péče o vnoučata tvoří v Evropě přes 40 % celkového přínosu lidí nad 60 let. HDP tuto hodnotu nezachytí.", pro: "Senioři nejsou jen příjemci péče. Pečovatelské kredity mohou tuto pomoc zviditelnit a ocenit.", on: ["vyzva-4", "vyzva-6"] },
+  { type: "Data", fig: "−8 %", src: "OECD 2024 · Sociální služby 2025", t: "Stárnutí sníží HDP na obyvatele", d: "Podle OECD stárnutí v příštích 30 letech sníží HDP na obyvatele v průměru o 8 %, v některých zemích až o 20 %. Hlavní recept: prodloužit ekonomicky aktivní věk a podporovat zdravé stárnutí a celoživotní vzdělávání.", pro: "Prevence a zdravé stárnutí jsou ekonomická nutnost, ne doplněk.", on: ["vyzva-6"] },
+  { type: "Inovace", fig: "+", sym: true, src: "Série „Odolnější“, 2023", t: "Očkování a prevence pro odolnější seniory", d: "Série rozhovorů s lékaři zdůrazňovala, že očkování zlepšuje odolnost seniorů a přispívá k delšímu a zdravějšímu životu.", pro: "Levný a ověřený nástroj prevence, se kterým může <b>výzva 6</b> počítat.", on: ["vyzva-6"] }
+];
+
+function casopis(pageId) {
+  const items = CASOPIS.filter(m => m.on.includes(pageId));
+  if (!items.length) return "";
+  return `<section class="mag" aria-labelledby="mag-h"><div class="wrap">
+    <div class="mag-head">
+      <div class="mono">Z časopisu Sociální služby · 2023–2025</div>
+      <h2 id="mag-h">Co říká obor</h2>
+      <p>Odborný časopis Asociace poskytovatelů sociálních služeb ČR. Vybrali jsme data, inovace, spory a změny zákonů, které se týkají tohoto tématu.</p>
+      <div class="mag-legend"><span>Data</span><span>Inovace</span><span>Spor ⇄</span><span>Zákon §</span><span>Problém</span></div>
+    </div>
+    <div class="mag-list">${items.map(m => `<article class="mrow">
+      <div class="mfig num ${m.sym ? "sym" : ""}" ${m.sym ? 'aria-hidden="true"' : ""}>${m.fig}</div>
+      <div class="mbody">
+        <div class="mtag"><b>${m.type}</b><span>${m.src}</span></div>
+        <h3>${m.t}</h3><p>${nb(m.d)}</p><p class="pro"><b>Pro nás:</b> ${nb(m.pro)}</p>
+      </div></article>`).join("")}</div>
+  </div></section>`;
+}
+
+function kraje(pageId) {
+  const items = KRAJE.filter(k => k.on.includes(pageId));
+  if (!items.length) return "";
+  const cls = t => ({ "Inovace": "inovace", "Napětí": "napeti", "Mezera": "mezera" }[t] || "");
+  return `<section class="kraje" aria-labelledby="kraje-h"><div class="wrap">
+    <div class="kraje-head">
+      <div><div class="mono">Z krajských střednědobých plánů rozvoje sociálních služeb</div><h2 id="kraje-h">Co už řeší kraje</h2></div>
+      <p>Střednědobé plány rozvoje sociálních služeb ze 14 krajů. Vybrali jsme inovace, problémy a mezery, které přímo souvisejí s tímto tématem.</p>
+    </div>
+    <div class="kraje-grid">${items.map(k => `<article class="kcard">
+      <div class="meta2"><span class="chip ${cls(k.type)}">${k.type}</span><span class="who">${k.kraj}</span></div>
+      <h3>${k.t}</h3><p>${nb(k.d)}</p><p class="rel">${k.rel}</p></article>`).join("")}</div>
+    <details><summary>Zdroje: 14 krajských střednědobých plánů rozvoje sociálních služeb</summary>
+      <div class="table-scroll"><table>${SPRSS.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join("")}</table></div>
+      <p style="margin-top:10px">Zlínský kraj je zastoupen akčním plánem, Královéhradecký revizí strategie a Karlovarský návrhem, proto se míra konkrétnosti liší.</p>
+    </details>
+  </div></section>`;
+}
+
+const app = document.getElementById("app");
+const byId = id => BARRIERS.find(b => b.id === id);
+const chTitle = c => c.title + (c.sub ? " (" + c.sub + ")" : "");
+
+const nb = t => t.replace(/(\d) (?=\d{3}\b)/g, "$1\u00a0").replace(/(\d) (%|Kč|h\b|tis\.|p\. b\.)/g, "$1\u00a0$2");
+// Hero bands stay text-only on every page; the graphic `art` argument is ignored.
+function band(kicker, title, lede, art = "", cls = "") {
+  return `<section class="band ${cls}"><div class="wrap">
+    <div class="txt"><div class="kicker">${kicker}</div><h1>${title}</h1>${lede ? `<p class="lede">${nb(lede)}</p>` : ""}</div>
+  </div></section>`;
+}
+
+// Graphic elements. Seeded so every page always draws the same composition.
+const PAL = {
+  demografie: { a: "#1f4dff", l: "#9fb3ff", t: "#e4ebff", d: "#0d2a9e" },
+  pecujici: { a: "#db5461", l: "#ecafb4", t: "#fbe8ea", d: "#8e2c37" },
+  finance: { a: "#6bd425", l: "#b9e899", t: "#eaf7df", d: "#3b7018" },
+  obce: { a: "#3ab795", l: "#a3dbcb", t: "#e1f3ed", d: "#1f6653" }
+};
+const BG = "var(--accent)"; // blocks in the band colour dissolve into the band
+const hash = s => [...s].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619), 2166136261) >>> 0;
+function rng(seed) {
+  let a = seed >>> 0;
+  return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+const pick = (r, list) => { let x = r() * list.reduce((s, [, w]) => s + w, 0); for (const [c, w] of list) if ((x -= w) < 0) return c; return list[0][0]; };
+const rects = (vw, vh, out) => `<svg viewBox="0 0 ${vw} ${vh}" preserveAspectRatio="none" shape-rendering="crispEdges" aria-hidden="true">${out.map(([x, y, w, h, c]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`).join("")}</svg>`;
+
+// Book-cover mosaic: recursive split of a grid into large and small blocks
+function mosaic(seed, colors, C = 16, R = 10) {
+  const r = rng(hash(seed)), out = [];
+  const leaf = (x, y, w, h) => out.push([x, y, w, h, pick(r, colors)]);
+  const split = (x, y, w, h, d) => {
+    if (w * h <= 1 || (w * h <= C * R / 7 && r() < 0.4)) return leaf(x, y, w, h);
+    const vert = w === 1 ? false : h === 1 ? true : r() < w / (w + h);
+    const k = 1 + Math.floor(r() * ((vert ? w : h) - 1));
+    if (vert) { split(x, y, k, h, d + 1); split(x + k, y, w - k, h, d + 1); }
+    else { split(x, y, w, k, d + 1); split(x, y + k, w, h - k, d + 1); }
+  };
+  split(0, 0, C, R, 0);
+  return rects(C, R, out);
+}
+const tones = (id, w = 1) => { const p = PAL[id]; return [[p.a, 2 * w], [p.l, 1.4 * w], [p.d, 1.1 * w], [p.t, 0.6 * w]]; };
+const pillarMosaic = (id, seed) => { const p = PAL[id]; return mosaic(seed, [[BG, 1.2], [p.l, 2], [p.d, 1.6], [p.t, 1], ["#ffffff", 0.5], ["#111318", 0.25]]); };
+const mixMosaic = (ids, seed) => mosaic(seed, [[BG, 1.6], ...ids.flatMap(id => tones(id)), ["#ffffff", 0.5]]);
+
+// Polychrome bars: narrow columns in a few rows, gaps left empty
+function poly(seed, ids, cols = 6, rows = 4) {
+  const r = rng(hash(seed)), set = ids.flatMap(id => [[PAL[id].a, 3], [PAL[id].l, 1.6], [PAL[id].d, 1.2]]), out = [];
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) if (r() > 0.22) out.push([x, y, 1, 1, pick(r, set)]);
+  return rects(cols, rows, out);
+}
+
+// Home: vertical stripes; each lower row is one year 2026–2050, shifted by that year's growth of the 80+ population
+function waveStripes() {
+  const P = PAL, seq = [P.pecujici.l, P.demografie.t, P.demografie.l, P.obce.a, P.finance.a, P.pecujici.a, P.demografie.d, P.pecujici.a, P.finance.a, P.obce.a, P.demografie.l, P.demografie.t];
+  const n = seq.length, cw = 10, W = n * cw, top = 46, rh = 54 / PRIRUSTEK.length, out = [];
+  const row = (y, h, s) => { for (let j = -3; j < n + 3; j++) out.push([+(j * cw + s).toFixed(2), +y.toFixed(3), cw, +(h + 0.05).toFixed(3), seq[(j % n + n) % n]]); };
+  row(0, top, 0);
+  PRIRUSTEK.forEach((v, i) => row(top + i * rh, rh, v / 40 * 18));
+  return `<div class="art-cap"><span>2026 ↓ 2050</span><span>posun = přírůstek lidí 80+</span></div>` + rects(W, top + 54, out);
+}
+
+function signature() {
+  const r = rng(hash("CARE 2035")), ids = Object.keys(PAL), out = [];
+  for (let x = 0; x < 72; x++) if (r() > 0.18) out.push([x, 0, 1, 1, pick(r, ids.flatMap(id => [[PAL[id].a, 3], [PAL[id].l, 1]]))]);
+  return rects(72, 1, out).replace("<svg", '<svg class="sig"');
+}
+const pips = ids => `<span class="pips" aria-hidden="true">${ids.map(id => `<i data-pillar="${id}"></i>`).join("")}</span>`;
+
+function barrierIndex() {
+  return `<div class="index">${BARRIERS.map(b => `
+    <a href="#${b.id}" data-pillar="${b.id}"><span class="k">${b.k}</span><span class="t">${b.title}<span class="d">${b.lede}</span></span><span class="arr" aria-hidden="true">→</span></a>`).join("")}</div>`;
+}
+function challengeIndex() {
+  return `<div class="index">${CHALLENGES.map(c => `
+    <a href="#vyzva-${c.n}"><span class="k">V${c.n}${pips(c.barriers)}</span><span class="t">${chTitle(c)}<span class="d">${c.hmw.replace(/<\/?em>/g, "")}</span></span><span class="arr" aria-hidden="true">→</span></a>`).join("")}</div>`;
+}
+
+function home() {
+  return `
+  ${band("Draft akčního plánu", "Udržitelný ekosystém péče 2035",
+    "V roce 2035 zasáhne Česko demografický náraz. Silné ročníky odejdou do důchodu a péče o stárnoucí rodiče dopadne na rodiny, které už dnes nesou většinu její tíhy. Tento web shrnuje výchozí stav a šest designových výzev pro workshopy CARE.", waveStripes(), "lead")}
+  <div class="wrap">
+    <div class="stats num" style="margin-top:40px">
+      <div class="stat" data-pillar="demografie"><b>824 tis.</b><span>lidí ve věku 80+ v roce 2035 (dnes 520 tis.)</span></div>
+      <div class="stat" data-pillar="pecujici"><b>800 tis.</b><span>neformálních pečujících drží systém nad vodou</span></div>
+      <div class="stat" data-pillar="pecujici"><b>80 %</b><span>veškeré péče poskytují rodiny a blízcí</span></div>
+      <div class="stat" data-pillar="demografie"><b>34 700</b><span>nových lůžek by bylo třeba bez změny modelu</span></div>
+    </div>
+    <section class="row" style="border-top:1px solid var(--ink)">
+      <div>
+        <div class="label mono">Jak s webem pracovat</div>
+        <h2>Designová výzva není hotové řešení.</h2>
+      </div>
+      <div class="prose">
+        <p>Výzva je přesná formulace problému, například jak sjednotit roztříštěný systém péče nebo jak chránit sendvičovou generaci před ekonomickým propadem. Otevírá cílený prostor pro hledání aplikovatelných řešení.</p>
+        <p>Před workshopem se zaměřte hlavně na sekci <a href="#vyzvy">Designové výzvy</a>. Mapa bariér a rizik popisuje, z čeho výzvy vycházejí.</p>
+      </div>
+    </section>
+    <section class="row">
+      <div>
+        <div class="label mono">Výchozí stav · 4 oblasti</div>
+        <h2><a href="#bariery" style="text-decoration:none">Mapa kritických bariér a rizik</a></h2>
+      </div>
+      ${barrierIndex()}
+    </section>
+    <section class="row">
+      <div>
+        <div class="label mono">Horizont 2035 · 6 výzev</div>
+        <h2><a href="#vyzvy" style="text-decoration:none">Designové výzvy pro neformální péči</a></h2>
+      </div>
+      ${challengeIndex()}
+    </section>
+    <section class="bridge" aria-labelledby="bridge-h">
+      <div>
+        <div class="label mono">Jak to souvisí</div>
+        <h2 id="bridge-h">Každá výzva stojí na jedné nebo dvou bariérách</h2>
+        <p>Barvy sloupců odpovídají oblastem výchozího stavu, ze kterých výzva vychází.</p>
+        <div class="plegend">${BARRIERS.map(b => `<span data-pillar="${b.id}"><i></i><b>${b.k}</b>${b.short}</span>`).join("")}</div>
+      </div>
+      <div class="poly">${CHALLENGES.map(c => `<a href="#vyzva-${c.n}">${poly("V" + c.n, c.barriers, 5, 3)}<span class="mono">V${c.n}</span><span class="t">${c.short}</span></a>`).join("")}</div>
+    </section>
+  </div>
+  <section class="mag"><div class="wrap">
+    <div class="mag-head">
+      <div class="mono">Z časopisu Sociální služby · 2023–2025</div>
+      <h2>Co říká obor</h2>
+    </div>
+    <p style="align-self:end;color:var(--ink-2);max-width:60ch">Na stránkách bariér a výzev najdete světle modré sekce s ${CASOPIS.length} podněty z odborného časopisu Sociální služby: čísla z terénu, zahraniční inspirace, nové zákony a spory, na kterých se obor neshodne.</p>
+  </div></section>
+  <section class="kraje" style="margin-top:0"><div class="wrap">
+    <div class="kraje-head">
+      <div><div class="mono">Z krajských střednědobých plánů rozvoje sociálních služeb</div><h2>Co už řeší kraje</h2></div>
+      <p>Na stránkách bariér a výzev najdete bílé sekce s ${KRAJE.length} podněty ze střednědobých plánů rozvoje sociálních služeb ${SPRSS.length} krajů: inovace, které už fungují, i problémy a mezery, na které plány narážejí.</p>
+    </div>
+  </div></section>`;
+}
+
+function barriersPage() {
+  return `
+  ${band("Výchozí stav", "Mapa kritických bariér a rizik", "Čtyři oblasti, ve kterých dnešní systém péče selhává nebo brzy selže. Známe je z dat a z praxe a vycházejí z nich designové výzvy.", mixMosaic(BARRIERS.map(b => b.id), "bariery"))}
+  <div class="wrap"><section class="row"><div><div class="label mono">4 oblasti</div><h2>Co víme o výchozím stavu</h2></div>${barrierIndex()}</section></div>`;
+}
+
+function challengesPage() {
+  return `
+  ${band("Horizont 2035", "Designové výzvy pro neformální péči", "Šest přesně formulovaných problémů ve formě otázky „Jak bychom mohli…“. Každá výzva otevírá prostor pro řešení a navazuje na konkrétní bariéry výchozího stavu.", `<div class="art-cap"><span>V1–V6</span><span>barvy podle bariér</span></div>` + rects(41, 4, CHALLENGES.flatMap((c, g) => { const r = rng(hash("V" + c.n)); const out = []; for (let y = 0; y < 4; y++) for (let x = 0; x < 6; x++) if (r() > 0.2) out.push([g * 7 + x, y, 1, 1, pick(r, c.barriers.flatMap(id => [[PAL[id].a, 3], [PAL[id].l, 1.6], [PAL[id].d, 1.2]]))]); return out; })))}
+  <div class="wrap"><section class="row"><div><div class="label mono">6 výzev</div><h2>Na co se zaměřit na workshopu</h2></div>${challengeIndex()}</section></div>`;
+}
+
+function side(label, items, current) {
+  const link = (i, cls) => `<a href="#${i.href}" class="${cls}" ${i.pillar ? `data-pillar="${i.pillar}"` : ""} ${i.href === current ? 'aria-current="true"' : ""}><span class="k" data-short="${i.short}">${i.k}</span><span class="t">${i.t}</span></a>`;
+  const active = items.find(i => i.href === current || (i.children || []).some(c => c.href === current));
+  const pill = i => `<a href="#${i.href}" ${i.pillar ? `data-pillar="${i.pillar}"` : ""} ${i.href === current ? 'aria-current="true"' : i === active ? 'class="parent"' : ""}><span class="k">${i.k}</span>${i.short}</a>`;
+  const subs = active && active.children && active.children.length ? active.children : null;
+  return `<div class="navcol">
+    <nav class="side" aria-label="${label}"><div class="mono">${label}</div>${items.map(i =>
+      link(i, "") + (i.children || []).map(c => link(c, "child")).join("")).join("")}</nav>
+    <div class="pills">
+      <nav class="pill-row main" aria-label="${label}">${items.map(pill).join("")}</nav>
+      ${subs ? `<div class="pill-sub"><span class="mono">${active.k} · ${active.short}</span>
+        <nav class="pill-row" aria-label="Podstránky: ${active.short}">${pill({ href: active.href, k: active.k, short: "Přehled", pillar: active.pillar })}${subs.map(pill).join("")}</nav></div>` : ""}
+    </div>
+  </div>`;
+}
+function barrierItems() {
+  return BARRIERS.map(x => ({ href: x.id, k: x.k, t: x.title, short: x.short, pillar: x.id,
+    children: (x.subs || []).map((s, j) => ({ href: s.id, k: x.k + (j + 1), t: s.t, short: s.short, pillar: x.id })) }));
+}
+
+function pager(prev, next) {
+  const a = (x, lbl) => x ? `<a href="#${x.href}"><span class="mono">${lbl}</span><b>${x.t}</b></a>` : "<span></span>";
+  return `<div class="pager">${a(prev, "← Předchozí")}${a(next, "Další →")}</div>`;
+}
+
+function barrierPage(b) {
+  const i = BARRIERS.indexOf(b);
+  const items = barrierItems();
+  const subFor = n => (b.subs || []).filter(s => s.fact === n || (s.also || []).includes(n));
+  return `
+  ${band(`<a class="crumb" href="#bariery">Mapa kritických bariér a rizik</a> · ${b.k}`, b.title, b.lede, pillarMosaic(b.id, b.id))}
+  <div class="wrap split">
+    ${side("Bariéry a rizika", items, b.id)}
+    <div>
+      <section class="row" style="padding-top:0">
+        <div>
+          <div class="label mono">${b.k} · Klíčové číslo</div>
+          <div class="big num" style="margin-top:0">${b.big}</div>
+          <p class="big-cap">${b.bigCap}</p>
+        </div>
+        <ul class="facts">${b.facts.map((f, n) => { const s = subFor(n); return `<li><span>${nb(f)}${s.map(x => `<br><a class="fact-link" href="#${x.id}">${x.short}: podrobně s grafy →</a>`).join("")}</span></li>`; }).join("")}</ul>
+      </section>
+      ${b.subs ? `<section class="row"><div><div class="label mono">${b.k} · Podstránky</div><h2>Data a grafy</h2></div>
+        <div class="index">${b.subs.map((s, j) => `<a href="#${s.id}"><span class="k">${b.k}${j + 1}</span><span class="t">${s.t}<span class="d">${s.short}</span></span><span class="arr" aria-hidden="true">→</span></a>`).join("")}</div></section>` : ""}
+      ${b.stats ? `<div class="stats num">${b.stats.map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("")}</div>` : ""}
+      <section class="row">
+        <div><div class="label mono">Navazující výzvy</div><h2>Kde s tím pracujeme</h2></div>
+        <div class="index">${b.related.map(n => { const c = CHALLENGES[n - 1]; return `<a href="#vyzva-${n}"><span class="k">V${n}</span><span class="t">${chTitle(c)}</span><span class="arr" aria-hidden="true">→</span></a>`; }).join("")}</div>
+      </section>
+      ${pager(items[i - 1], items[i + 1])}
+    </div>
+  </div>
+  ${casopis(b.id)}
+  ${kraje(b.id)}`;
+}
+
+function challengePage(c) {
+  const items = CHALLENGES.map(x => ({ href: "vyzva-" + x.n, k: "V" + x.n, t: x.title, short: x.short }));
+  const i = c.n - 1;
+  return `
+  ${band(`<a class="crumb" href="#vyzvy">Designové výzvy pro neformální péči k roku 2035</a> · Výzva ${c.n}`, c.title, c.sub ? c.sub : "", `<div class="art-cap"><span>Vychází z</span><span>${c.barriers.map(id => byId(id).k + " · " + byId(id).short).join(" + ")}</span></div>` + mixMosaic(c.barriers, "vyzva-" + c.n))}
+  <div class="wrap split">
+    ${side("Designové výzvy", items, "vyzva-" + c.n)}
+    <div>
+      <section style="padding-bottom:40px">
+        <div class="label mono" style="color:var(--ink-2);margin-bottom:16px">Jak bychom mohli…</div>
+        <p class="hmw">${c.hmw}</p>
+      </section>
+      <section class="row" style="border-top:1px solid var(--ink)">
+        <div>
+          <div class="label mono">Odůvodnění</div>
+          <h2>Proč je to problém</h2>
+          ${c.stat ? `<div class="big num">${c.stat[0]}</div><p class="big-cap">${c.stat[1]}</p>` : ""}
+        </div>
+        <div class="prose">${c.why.map(p => `<p>${p}</p>`).join("")}</div>
+      </section>
+      <section class="row">
+        <div><div class="label mono">Výchozí stav</div><h2>Z jakých bariér výzva vychází</h2></div>
+        <div class="index">${c.barriers.map(id => { const b = byId(id); return `<a href="#${b.id}" data-pillar="${b.id}"><span class="k">${b.k}</span><span class="t">${b.title}</span><span class="arr" aria-hidden="true">→</span></a>`; }).join("")}</div>
+      </section>
+      ${c.sources || c.link ? `<section class="row">
+        <div><div class="label mono">Podklady</div><h2>Relevantní zdroje</h2></div>
+        <div class="tag-list">${(c.sources || []).map(s => `<span class="tag">${s}</span>`).join("")}${c.link ? `<a class="tag" href="${c.link[1]}" target="_blank" rel="noopener">${c.link[0]} ↗</a>` : ""}</div>
+      </section>` : ""}
+      ${pager(items[i - 1], items[i + 1])}
+    </div>
+  </div>
+  ${casopis("vyzva-" + c.n)}
+  ${kraje("vyzva-" + c.n)}`;
+}
+
+const svg = id => document.getElementById(id).innerHTML;
+const figure = (filled) => `<svg class="picto" viewBox="0 0 260 150" role="img" aria-label="Jeden ze čtyř lidí je znázorněn plnou barvou">
+  ${[0, 1, 2, 3].map(i => { const x = 8 + i * 62, f = i < filled;
+    return `<circle cx="${x + 24}" cy="20" r="16" fill="${f ? "var(--blue-soft)" : "none"}" stroke="${f ? "none" : "var(--ink)"}" stroke-width="3"/>
+    <path d="M${x} 140V70q0-24 24-24t24 24V140Z" fill="${f ? "var(--blue-soft)" : "none"}" stroke="${f ? "none" : "var(--ink)"}" stroke-width="3" stroke-linejoin="round"/>`; }).join("")}</svg>`;
+
+// Phone chart variants (same data as poster charts, drawn at ~1:1 scale)
+const RUST = {
+  y80: [100, 104.9, 112.6, 120.3, 127, 132.8, 138.5, 144.3, 149.7, 154.3, 158.5, 162.2, 165.5, 167.6, 168.3, 167.9, 167.6, 167.6, 167.9, 170.3, 173.2, 175.5, 177, 178.5, 179.9, 182.8],
+  grey: [
+    [100, 96.4, 93.1, 91.2, 92.8, 96.7, 99.4, 100.8, 101.8, 100.7, 100, 101, 103.6, 107.9, 115.2, 122.5, 129.1, 134, 137.3, 137.7, 135.3, 131.2, 126.3, 122.1, 118, 114.4],
+    [100, 99.5, 98.4, 96.6, 94.3, 90.7, 87.3, 84.8, 83.8, 85.7, 89.4, 91.7, 93.3, 94.1, 93.3, 93, 94, 96.6, 101.1, 107.7, 114.5, 121, 125.9, 128.9, 129.2, 127.2],
+    [100, 103.9, 104.3, 103.9, 103.9, 104.3, 104.1, 103.5, 102, 99.6, 96.1, 93.1, 90.8, 89.6, 91.8, 95.7, 98.8, 101, 102, 101.2, 101, 102.4, 105.9, 110.4, 117.6, 125.9]
+  ]
+};
+const PRIRUSTEK = [25.2, 40, 40, 35, 30, 30, 30, 28, 24, 22, 19, 17, 11, 4, -2, -2, 0, 2, 12, 15, 12, 8, 8, 7, 15]; // tis., roky 2026–2050
+const UVAZKY = [["pečující pracovníci", 14884, "52 %"], ["obslužný personál", 5521, "19 %"], ["zdravotnický personál", 3457, "12 %"], ["sociální pracovníci", 1300], ["administrativní pracovníci", 1300], ["vedoucí pracovníci", 1000], ["vychovatelé a pedagogičtí pracovníci", 700], ["odborní pracovníci", 150], ["ostatní", 60]];
+const fmt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+function mRust() {
+  const W = 340, H = 240, x0 = 30, x1 = 262, top = 16, bot = 206;
+  const X = i => x0 + (x1 - x0) * i / 25, Y = v => bot - (v - 80) / 100 * (bot - top);
+  const line = a => a.map((v, i) => (i ? "L" : "M") + X(i).toFixed(1) + "," + Y(v).toFixed(1)).join("");
+  let g = "";
+  for (let v = 80; v <= 180; v += 20) g += `<line x1="${x0}" x2="${x1}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v === 100 ? "var(--axis)" : "var(--line)"}"/><text x="${x0 - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="var(--ink-3)">${v}</text>`;
+  [0, 10, 25].forEach(i => g += `<text x="${X(i)}" y="${H - 14}" text-anchor="${i === 25 ? "end" : "middle"}" font-size="11" fill="var(--ink-3)">${2025 + i}</text>`);
+  return `<svg class="mchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Index počtu osob 80+ (2025 = 100): 159 v roce 2035, 183 v roce 2050; skupiny 65–79 let 114–127">${g}
+    ${RUST.grey.map(a => `<path d="${line(a)}" fill="none" stroke="var(--grey)" stroke-width="2" stroke-linejoin="round"/>`).join("")}
+    <path d="${line(RUST.y80)}L${X(25)},${bot}L${x0},${bot}Z" fill="var(--accent-wash)"/>
+    <path d="${line(RUST.y80)}" fill="none" stroke="var(--accent-ink)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${X(10)}" cy="${Y(158.5)}" r="4.5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/>
+    <circle cx="${X(25)}" cy="${Y(182.8)}" r="4.5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/>
+    <text x="${X(10) - 8}" y="${Y(158.5) - 8}" text-anchor="end" font-size="12" fill="var(--ink-2)">2035: 159</text>
+    <text x="${X(25) + 8}" y="${Y(182.8) + 4}" font-size="13" font-weight="700" fill="var(--ink)">183</text>
+    <text x="${X(25) + 8}" y="${Y(182.8) + 19}" font-size="11" fill="var(--ink-2)">80+</text>
+    <text x="${X(25) + 8}" y="${Y(120)}" font-size="11" fill="var(--ink-2)">65–79</text>
+    <text x="${X(25) + 8}" y="${Y(120) + 14}" font-size="11" fill="var(--ink-2)">114–127</text>
+  </svg>`;
+}
+
+function mPrirustek() {
+  const W = 340, H = 244, x0 = 40, x1 = 336, top = 50, zero = 184, per = (zero - top) / 40, pitch = (x1 - x0) / 25;
+  const X = i => x0 + i * pitch;
+  let g = `<rect x="${X(1) - 2}" y="4" width="${pitch * 11 + 2}" height="${zero - 4 + 14}" rx="4" fill="var(--accent-wash)"/>
+    <text x="${X(1) + 4}" y="20" font-size="12" font-weight="600" fill="var(--ink)">zlom 2027–2037</text>`;
+  [0, 10, 20, 30, 40].forEach(v => g += `<line x1="${x0}" x2="${x1}" y1="${zero - v * per}" y2="${zero - v * per}" stroke="${v ? "var(--line)" : "var(--axis)"}"/><text x="${x0 - 6}" y="${zero - v * per + 4}" text-anchor="end" font-size="11" fill="var(--ink-3)">${v ? v + " tis." : "0"}</text>`);
+  PRIRUSTEK.forEach((v, i) => {
+    const h = Math.max(Math.abs(v) * per, 1.5), y = v >= 0 ? zero - h : zero;
+    g += `<rect x="${X(i) + 1.5}" y="${y}" width="${pitch - 3}" height="${h}" rx="1.5" fill="${i >= 1 && i <= 11 ? "var(--accent)" : "var(--grey)"}"/>`;
+  });
+  [[1, "2027", "middle"], [11, "2037", "middle"], [19, "2045", "middle"], [24, "2050", "end"]].forEach(([i, t, a]) => g += `<text x="${a === "end" ? x1 : X(i) + pitch / 2}" y="${H - 22}" text-anchor="${a}" font-size="11" fill="var(--ink-3)">${t}</text>`);
+  g += `<text x="${X(1) + pitch / 2}" y="${zero - 40 * per - 5}" text-anchor="start" font-size="12" font-weight="700" fill="var(--ink)" dx="-4">+40 tis.</text>`;
+  return `<svg class="mchart" viewBox="0 0 ${W} ${H - 10}" role="img" aria-label="Meziroční přírůstek lidí 80+ v letech 2026–2050; v letech 2027–2037 až 40 tisíc ročně">${g}</svg>`;
+}
+
+function mKlienti() {
+  const rows = [["2025", 125, 520, ""], ["2035", 198, 824, "+73 tis. klientů oproti 2025 (+59 %)"], ["2050", 228, 950, "+103 tis. klientů oproti 2025 (+83 %)"]];
+  return `<div class="mbars num">${rows.map(([y, a, t, n]) => `<div>
+    <div class="mbar-l"><b>${y}</b><span><span class="hot">${a} tis.</span> z ${t} tis.</span></div>
+    <div class="mbar-t"><i class="b" style="width:${a / 10}%"></i><i style="width:${(t - a) / 10}%"></i></div>
+    ${n ? `<p class="mnote">${n}</p>` : ""}</div>`).join("")}</div>`;
+}
+
+function mUvazky() {
+  return `<div class="mbars num">${UVAZKY.map(([l, v, pct], i) => `<div>
+    <div class="mbar-l"><span class="${i < 3 ? "hot" : ""}">${l}</span><span><b style="color:var(--ink)">+${fmt(v)}</b>${pct ? " · " + pct : ""}</span></div>
+    <div class="mbar-t"><i class="${i < 3 ? "b" : ""}" style="width:${v / 160}%"></i></div></div>`).join("")}</div>`;
+}
+
+// Responsive HTML charts in the poster style. Accent = the focus of the chart, grey = context.
+const pc = v => String(v).replace(".", ",") + " %";
+const legendHtml = items => `<div class="legend">${items.map(([c, t]) => `<span><i class="${c}"></i>${t}</span>`).join("")}</div>`;
+const hbarsHtml = (items, max, fmt = pc) => `<div class="hc num">${items.map(([l, v, c = "", show]) =>
+  `<div class="hb ${c}"><span class="l">${l}</span><span class="tr"><i class="bar" style="width:calc((100% - 6.5em) * ${v / max})"></i><b class="v">${show || fmt(v)}</b></span></div>`).join("")}</div>`;
+const dumbbellHtml = (items, max, ya, yb) => `<div class="hc num">${items.map(([l, a, b]) =>
+  `<div class="db"><span class="l">${l}</span><span class="tr"><i class="seg" style="left:${a / max * 100}%;width:${(b - a) / max * 100}%"></i><i class="d" style="left:${a / max * 100}%"></i><i class="d b" style="left:${b / max * 100}%"></i></span><span class="v">${ya}: ${pc(a)} → ${yb}: <b>${pc(b)}</b></span></div>`).join("")}</div>`;
+const stackHtml = (rows, cls = "") => `<div class="hc num">${rows.map(([l, segs]) =>
+  `<div class="sk ${cls}">${l ? `<span class="l">${l}</span>` : ""}<span class="tr">${segs.map(([w, c, t]) => `<span class="${c}" style="flex:${w} 1 0">${t}</span>`).join("")}</span></div>`).join("")}</div>`;
+const unitsHtml = (n, blue, size) => `<div class="ugrid" style="--u:${size || 8}px" aria-hidden="true">${"<i class=\"b\"></i>".repeat(blue)}${"<i></i>".repeat(n - blue)}</div>`;
+const crow = (label, h2, left, right) => `<section class="row chart-row"><div><div class="label mono">${label}</div><h2>${nb(h2)}</h2>${left || ""}</div><div>${right}</div></section>`;
+const bigStat = (v, cap) => `<div class="big num">${v}</div><p class="big-cap">${nb(cap)}</p>`;
+const leadHtml = (h1, sub, kicker) => `<section class="lead-row">${kicker ? `<p class="kicker-l">${kicker}</p>` : ""}<h2 class="poster-h">${h1}</h2>${sub ? `<p class="poster-sub" style="max-width:44ch">${nb(sub)}</p>` : ""}</section>`;
+const srcHtml = t => `<p class="src">${nb(t)}</p>`;
+const MPSV24 = "MPSV / SC&C: Průzkum „Pečující osoby v ČR“, 2024 (n = 3 203, z toho 717 pečujících; otázka HO12, možnost více odpovědí)";
+const MPSV18 = "srovnání 2018 vs. 2024: tamtéž, kap. 8, se šetřením FDV „Podpora neformálních pečujících II“ (2018); otázky se částečně lišily, srovnání je orientační";
+const PAQ = "PAQ Research: Životní podmínky osob s vysokou potřebou péče, 2026 (258 pečujících žijících s opečovávaným ve věku 18–64 let)";
+
+const HODINY = [["I. stupeň", "lehká závislost", 50, 5.7], ["II. stupeň", "středně těžká závislost", 105, 31.6], ["III. stupeň", "těžká závislost", 227, 95.5], ["IV. stupeň", "úplná závislost", 412, 148.4]];
+const hodinyHtml = () => `<div role="img" aria-label="Hodiny péče měsíčně podle stupně závislosti, jeden čtvereček je jedna hodina. I. stupeň 50 h, příspěvek zaplatí 5,7 h. II. stupeň 105 h, příspěvek 31,6 h. III. stupeň 227 h, příspěvek 95,5 h. IV. stupeň 412 h, příspěvek 148,4 h. Zbytek zajistí rodina.">${HODINY.map(([s, d, n, p]) => `
+  <div class="ublock num"><div class="uhead"><span><b>${s}</b> · ${d}</span><span><b>${n} h</b> · příspěvek ${pc(p).replace(" %", " h")} · rodina ${String(Math.round((n - p) * 10) / 10).replace(".", ",")} h</span></div>${unitsHtml(n, Math.floor(p))}</div>`).join("")}
+  <p class="cnote" style="margin-top:8px">1 čtvereček = 1 hodina péče měsíčně</p></div>`;
+
+const SUBPAGES_B = {
+  "pecujici-cas": () => `
+    ${leadHtml("příspěvek zaplatí méně než <em>polovinu</em> hodin péče", "", "Když lidé potřebují péči a chtějí prožít stáří doma nebo v okruhu svých blízkých,")}
+    ${crow("01 · Hodiny péče měsíčně", "Ve IV. stupni potřebuje člověk 412 hodin péče měsíčně. Příspěvek zaplatí 148.",
+      bigStat("36 %", "hodin pokryje příspěvek ve IV. stupni závislosti, zbytek zajistí rodina") +
+      `<div class="tiles num" style="margin-top:24px"><div class="tile"><b>263,6 h</b><span>měsíčně zajistí rodina ve IV. stupni, víc než 1,5 plného úvazku (40 h týdně)</span></div><div class="tile"><b>42,1 %</b><span>nejvyšší pokrytí hodin příspěvkem, ve III. stupni</span></div></div>`,
+      `<p class="cnote">Potřeba péče podle stupně závislosti, hodiny měsíčně. Cena péče 155 Kč/hod.</p>${legendHtml([["b", "hodina zaplacená příspěvkem na péči"], ["", "hodina, kterou zajistí rodina"]])}${hodinyHtml()}`)}
+    ${crow("02 · Genderová past a chudoba", "Péče vytlačuje ženy z práce a ve stáří je dožene chudoba.", "",
+      `<div class="tiles num"><div class="tile b"><b>80 %</b><span>pečujících tvoří ženy</span></div><div class="tile"><b>19 600–19 900</b><span>Kč: průměrný starobní důchod žen, odhad pro rok 2026</span></div></div>
+      <p class="chain">Neplacená péče nutí pečující opouštět trh práce <i>→</i> okamžitý propad příjmů rodiny <i>→</i> nízký vyměřovací základ pro důchod <i>→</i> chudoba ve stáří.</p>`)}
+    ${srcHtml("Zdroj: MPSV (výše příspěvku na péči a potřeba hodin péče podle stupně závislosti), Seznam Zprávy (cena péče 155 Kč/hod). Vlastní výpočty: hodiny z příspěvku = příspěvek ÷ 155 Kč (I. 880 Kč → 5,7 h; II. 4 900 Kč → 31,6 h; III. 14 800 Kč → 95,5 h; IV. 23 000 Kč → 148,4 h), hodiny rodiny = potřeba − hodiny z příspěvku, pokrytí = podíl obou. Plný úvazek 40 h týdně ≈ 173 h měsíčně. V grafu jsou hodiny z příspěvku zaokrouhleny dolů na celé čtverečky. Podíl žen mezi pečujícími (80 %) a průměrný starobní důchod žen (odhad 2026): zdroj bude doplněn.")}`,
+
+  "pecujici-sendvic": () => `
+    ${leadHtml("Pečují o rodiče, i když je jim samým <em>kolem 70</em> let", "Jednou z nejvýraznějších výzev je sendvičová generace. S prodlužováním délky života pečují o seniory ve věku 85 až 95 let jejich děti, kterým je samým 65 až 75 let.")}
+    ${crow("01 · Sendvičová generace", "Ocitají se v kleštích mezi péčí o rodiče a pomocí mladé rodině.", "",
+      `<div class="sandwich num"><div class="tile"><b>85–95</b><span>let: rodiče, kteří potřebují péči</span></div><div class="arr" aria-hidden="true"><span class="g">←</span><small>péče</small></div><div class="tile b"><b>65–75</b><span>let: jejich děti, které o ně pečují</span></div><div class="arr" aria-hidden="true"><span class="g">→</span><small>pomoc</small></div><div class="tile"><b>vnoučata</b><span>mladá rodina, která čeká pomoc s hlídáním</span></div></div>
+      <p class="prose-b">Tito pečující jsou často sami již v důchodovém věku a potýkají se s vlastními zdravotními problémy a úbytkem sil. Zároveň jsou pod tlakem mladších generací (svých dětí), aby pomáhali s vnoučaty.</p>`)}
+    ${crow("02 · Čeho se pečující bojí", "Víc než polovina lidí se bojí psychické zátěže z péče, téměř polovina finanční.",
+      bigStat("55,7 %", "by se obávalo psychické zátěže, kdyby pečovali o blízkého"),
+      `<p class="cnote">Pokud byste pečoval/a o svého blízkého, který by nebyl soběstačný, jaké obavy byste měl/a? Podíl dotázaných, více odpovědí možných.</p>${legendHtml([["b", "dvě nejčastější obavy"], ["", "ostatní odpovědi"]])}
+      ${hbarsHtml([["Psychická zátěž", 55.7, "b"], ["Finanční zátěž", 48.2, "b"], ["Nedostatečná péče z mé strany", 32.7], ["Fyzická zátěž", 29.5], ["Zanedbávání nejbližší rodiny", 19.2], ["Nedostatek času na sebe", 16.7], ["Měl/a bych obavy, že to bude …", 9.8], ["Žádná negativa bych nevnímal/a", 9], ["Pomluvy lidí", 2.7], ["Nedělal/a bych to", 1.7], ["Jiné", 0.7]], 60)}`)}
+    ${crow("03 · Zdraví pečujících a seniorů", "Samota a izolace poškozují zdraví pečujících i seniorů.", "",
+      `<div class="tiles num"><div class="tile"><b>15 cigaret</b><span>denně: srovnatelně zvyšují izolace a samota mortalitu pečujících i seniorů</span></div><div class="tile b"><b>+23 %</b><span>vyšší výskyt kardiovaskulárních onemocnění u pečujících</span></div></div>
+      <p class="prose-b">Izolace a samota zároveň představují významné riziko pro rozvoj degenerativních onemocnění mozku u seniorů. Včasná intervence a léčba těchto stavů umožňuje starším osobám prodloužit soběstačnost a zachovat si bydlení ve vlastním domově.</p>`)}
+    ${srcHtml("Obavy z péče: průzkum Provident (Seznam Zprávy), více odpovědí možných, podíly se nesčítají do 100 %; popisek „Měl/a bych obavy, že to bude …“ je zkrácený už ve zdroji. Sendvičová generace (věk pečujících a opečovávaných), mortalita srovnatelná s 15 cigaretami denně a o 23 % vyšší výskyt kardiovaskulárních onemocnění u pečujících: zdroje budou doplněny.")}`,
+
+  "pecujici-prace": () => `
+    ${leadHtml("<em>Každý čtvrtý</em> pečující musel kvůli péči omezit práci", "Péče o blízkého zabere v průměru 29 hodin týdně, dvě třetiny úvazku. Čím je náročnější, tím častěji pečující přichází o práci úplně.")}
+    ${crow("01 · Co se stalo s prací", "12 % pečujících odešlo ze zaměstnání, dalších 12 % snížilo úvazek.",
+      bigStat("24 %", "pečujících zkrátilo úvazek, omezilo podnikání nebo odešlo z práce"),
+      `<p class="cnote">Uveďte, zda jste v souvislosti s péčí zažil/a tyto situace. Podíl pečujících v %.</p>${legendHtml([["b", "ztráta nebo zkrácení práce"], ["", "ostatní dopady na práci"]])}
+      ${hbarsHtml([["Odchod ze zaměstnání či konec podnikání", 12, "b"], ["Snížení úvazku či omezení podnikání", 12, "b"], ["Změna zaměstnavatele", 5], ["Odchod do předčasného důchodu", 4], ["Změna profese", 3], ["Omezení či ukončení studia", 3], ["Řádný důchod dříve, než plánoval/a", 1]], 15)}`)}
+    ${crow("02 · Kdo ztratí", "Když pečující odejde z práce, přijde ročně až o 278 tisíc Kč. Stát ztratí téměř stejně na daních a odvodech.",
+      bigStat("550 tis.", "Kč ročně ztratí dohromady pečující a stát na jednoho člověka, který kvůli péči opustí práci"),
+      `<p class="cnote">Odhad roční ztráty na 1 pečujícího, který kvůli péči opustí práci. Kč.</p>${legendHtml([["b", "ušlá mzda pečujícího"], ["", "daně a odvody, o které přijde stát"]])}
+      ${stackHtml([["", [[278000, "b", "Pečující: až 278 tis. Kč"], [271680, "", "Stát: až 272 tis. Kč"]]]], "wide")}
+      <p class="cnote" style="margin-top:10px">Celkem až 550 tis. Kč ročně na 1 člověka</p>`)}
+    ${crow("03 · Vývoj 2018–2024", "Podíl pečujících, kteří kvůli péči odešli z práce, se za šest let zdvojnásobil.",
+      bigStat("11 %", "pečujících odešlo z práce v roce 2024, v roce 2018 to bylo 5 %"),
+      `<p class="cnote">Srovnatelná otázka v letech 2018 a 2024. Podíl pečujících v %.</p>${legendHtml([["dot", "2018"], ["dot b", "2024"]])}
+      ${dumbbellHtml([["Odchod ze zaměstnání či konec podnikání", 5, 11], ["Snížení úvazku či omezení podnikání", 6, 13], ["Odchod do předčasného důchodu", 1, 3]], 15, "2018", "2024")}`)}
+    ${srcHtml(`Zdroje: ${MPSV24}; ${MPSV18}. Ztráty: projekt Neviditelní (Provident Financial, Genixa, Nadace Krása pomoci), odhad analytika CETA, 6/2026; jde o horní odhad („až“) bez zveřejněné metodiky, součet 278 000 + 271 680 ≈ 550 tis. Kč je vlastní dopočet. Údaj 29 h týdně: MPSV 2024. Součet 12 + 12 = 24 % uvádí zpráva MPSV. Intenzivní péče (perex): ${PAQ}.`)}`,
+
+  "pecujici-zeny": () => `
+    ${leadHtml("Péče padá hlavně na <em>ženy</em> a doprovází je až do důchodu", "Ženy tvoří 60 % pečujících v Česku. Ty, které kvůli péči odejdou do důchodu dřív, mají potom výrazně nižší příjem než ostatní ženy.")}
+    ${crow("01 · Kdo pečuje", "Ženy převažují u I. až III. stupně závislosti. Muži se zapojují víc až u nejtěžší péče.",
+      bigStat("60 %", "pečujících v Česku jsou ženy"),
+      `<p class="cnote">Složení pečujících podle přiznaného stupně závislosti opečovávaného, %.</p>${legendHtml([["b", "pečující ženy"], ["", "pečující muži"]])}
+      ${stackHtml([["I. stupeň", 68], ["II. stupeň", 65], ["III. stupeň", 66], ["IV. stupeň", 50]].map(([l, v]) => [l, [[v, "b", pc(v)], [100 - v, "", pc(100 - v)]]]))}`)}
+    ${crow("02 · Kdo odchází do důchodu", "Mezi lidmi, kteří odešli do důchodu kvůli nemoci blízkého, jsou téměř tři čtvrtiny ženy.",
+      bigStat("73 %", "žen mezi lidmi, kteří odešli do důchodu kvůli nemoci příbuzného či přítele"),
+      `<p class="cnote">Evropa, SHARE. 1 čtvereček = 1 % lidí, kteří odešli do důchodu kvůli nemoci blízkého.</p>${legendHtml([["b", "ženy"], ["", "muži"]])}
+      <div role="img" aria-label="73 % žen a 27 % mužů">${unitsHtml(100, 73, 22)}</div>
+      <div class="uhead num" style="margin-top:8px"><b>ženy 73 %</b><span>muži 27 %</span></div>`)}
+    ${crow("03 · Kolik ztratí", "Ženy, které odešly do důchodu kvůli péči, přišly o 40–45 % příjmu. Ostatní ženy asi o 30 %.",
+      bigStat("10–15", "procentních bodů: o tolik větší je pokles příjmu žen, které odešly do důchodu kvůli péči"),
+      `<p class="cnote">Pokles příjmu po odchodu do důchodu, % posledního příjmu před důchodem. Ženy, Evropa.</p>${legendHtml([["b", "odešly kvůli péči"], ["", "odešly z jiných důvodů"]])}
+      ${hbarsHtml([["Odešly do důchodu kvůli péči", 42.5, "b", "40–45 %"], ["Odešly z jiných důvodů", 30, "", "≈ 30 %"]], 50)}`)}
+    ${srcHtml(`Zdroje: ${MPSV24}, kap. 9, hypotéza 14 (otázka HO8; podíl žen 60 %). Maura & Profeta: Women’s Caring Penalty at Retirement in Europe, SHARE Working Paper 95/2024, doi 10.6103/wp.952024 (SHARE vlny 1–9; 1 364 lidí odešlo do důchodu kvůli nemoci blízkého, 73 % žen). Hodnoty 40–45 % a ≈ 30 % jsou převzaty z textu studie (obr. 3.3), sloupec 42,5 % je střed rozpětí. V Česku uvedlo dřívější odchod do důchodu kvůli péči 5 % pečujících (MPSV 2024).`)}`,
+
+  "pecujici-zdravi": () => `
+    ${leadHtml("<em>Každému čtvrtému</em> pečujícímu se zhoršilo duševní zdraví", "Péče bere čas na odpočinek, přátele i partnera. Od roku 2018 dopady na zdraví rostou a u intenzivní péče jsou nejsilnější.")}
+    ${crow("01 · Dopady péče", "Nejčastějším dopadem péče je zhoršení duševního zdraví včetně vyhoření.",
+      bigStat("26 %", "pečujících uvádí zhoršení duševního zdraví"),
+      `<p class="cnote">Uveďte, zda jste v souvislosti s péčí zažil/a tyto situace. Podíl pečujících v %.</p>${legendHtml([["b", "duševní zdraví"], ["", "ostatní dopady"]])}
+      ${hbarsHtml([["Zhoršilo se mé duševní zdraví", 26, "b"], ["Zhoršilo se mé fyzické zdraví", 18], ["Nemám téměř osobní život", 14], ["Zhoršily se vztahy s rodinou, přáteli", 13], ["Zhoršil se vztah s partnerem", 9]], 30)}`)}
+    ${crow("02 · Vývoj 2018–2024", "Za šest let přibylo pečujících se zhoršeným duševním zdravím o 9 procentních bodů.",
+      bigStat("+9 p. b.", "pečujících se zhoršeným duševním zdravím: 18 % v roce 2018, 27 % v roce 2024"),
+      `<p class="cnote">Srovnatelná otázka v letech 2018 a 2024. Podíl pečujících v %.</p>${legendHtml([["dot", "2018"], ["dot b", "2024"]])}
+      ${dumbbellHtml([["Zhoršilo se duševní zdraví", 18, 27], ["Zhoršilo se fyzické zdraví", 16, 20], ["Zhoršily se vztahy s rodinou, přáteli", 9, 15], ["Zhoršil se vztah s partnerem", 3, 9]], 30, "2018", "2024")}`)}
+    ${crow("03 · Intenzivní péče", "Pečující o lidi s vysokou potřebou péče mají téměř trojnásobné riziko příznaků deprese a úzkosti.",
+      bigStat("téměř 3×", "vyšší riziko příznaků deprese a úzkosti než běžná populace"),
+      `<p class="cnote">Riziko příznaků deprese či úzkosti, běžná populace = 1.</p>${legendHtml([["b", "intenzivně pečující"], ["", "běžná populace"]])}
+      ${hbarsHtml([["Běžná populace", 1, "", "1×"], ["Intenzivně pečující", 2.9, "b", "téměř 3×"]], 3.2)}`)}
+    ${srcHtml(`Zdroje: ${MPSV24}; ${MPSV18}. Hodnoty 26 % (všichni pečující, HO12) a 27 % (srovnávací tabulka 2024) pocházejí z různých částí zprávy. ${PAQ}: „téměř třikrát vyšší riziko“ příznaků deprese či úzkosti; sloupec 2,9× je ilustrační vyjádření tohoto slovního údaje. Zhruba 75 % intenzivně pečujících popisuje péči jako psychicky a fyzicky vyčerpávající (PAQ).`)}`
+};
+
+const house = bad => `<svg viewBox="0 0 44 42" aria-hidden="true"><path d="M2 18 22 2l20 16v22H2Z" fill="${bad ? "var(--accent)" : "var(--paper)"}" stroke="${bad ? "none" : "var(--ink)"}" stroke-width="2" stroke-linejoin="round" ${bad ? "" : 'stroke-dasharray="4 4"'}/>${bad ? '<path d="M15 24l14 12M29 24 15 36" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>' : ""}</svg>`;
+
+const SUBPAGES_C = {
+  "finance-seda-zona": () => `
+    ${leadHtml("Kde systém nestačí, <em>vzniká šedá zóna</em>", "Technologie, které by udržely seniora doma, nemají kde se zaplatit. Rodiny proto improvizují: kupují levné technologie bez záruk a najímají pečovatelky mimo legální trh.")}
+    ${crow("01 · Kdo zaplatí", "Moderní asistivní technologie nehradí zdravotní pojištění ani sociální systém. Zaplatí je rodina.",
+      bigStat("0 Kč", "z veřejných peněz na senzory, radary či AI monitoring, pokud nejsou zdravotnickým prostředkem (údaj k ověření)"),
+      `<p class="cnote">Kde asistivní technologie propadají mezi systémy.</p>${legendHtml([["", "veřejný systém"], ["dash", "mezera: platí rodina"]])}
+      <div class="hc"><div class="gapmap" role="img" aria-label="Asistivní technologie propadají mezi zdravotním a sociálním systémem">
+        <div><b>Zdravotní systém</b>hradí zdravotnické prostředky z uzavřeného seznamu (vyhláška č. 388/2011 Sb.)</div>
+        <div class="gap"><b>Asistivní technologie</b>senzory pádu a pohybu, radary, AI monitoring, telemedicínské podložky<strong>platí rodina sama</strong></div>
+        <div><b>Sociální systém</b>příspěvek na péči, registrované sociální služby, půjčovny pomůcek</div>
+      </div></div>
+      <p class="cnote" style="margin-top:10px">Zdroj mezery: technologie nejsou na seznamu hrazených prostředků a nejsou ani sociální službou.</p>`)}
+    ${crow("02 · Kdo bude pečovat", "Do roku 2050 bude v EU chybět přes 10 milionů neformálních pečujících. Mezeru už dnes plní šedá zóna.",
+      bigStat("1,2 mil.", "pečovatelek bydlících u klienta pracuje v EU v neregulované „šedé“ zóně"),
+      `<p class="cnote">Neformální pečující v EU, mil. osob.</p>${legendHtml([["", "pečující dnes"], ["b", "chybí do 2050"]])}
+      ${stackHtml([["pečující dnes", [[52, "", "52 mil."], [10, "none", ""]]], ["potřeba 2050", [[52, "", "52 mil."], [10, "b", "+10 mil."]]]])}`)}
+    <section class="two">
+      <div><div class="mono">03 · Jak si rodiny pomáhají</div><h3>Levné kamery a práce na černo</h3>
+        <p>Rodiny kupují neregistrované kamery a senzory bez záruky ochrany dat. Obor přitom rozlišuje technologie, které soukromí a GDPR neporušují (SOS tlačítko, detekce pádu), od „dohledových“ kamer za hranicí GDPR.</p></div>
+      <div><div class="mono">04 · Co navrhuje obor</div><h3>Certifikace a půjčovny</h3>
+        <p>Zřídit certifikační autoritu asistivních technologií, zařadit je do běžných půjčoven kompenzačních pomůcek a dopsat chybějící vyhlášky k zákonu o sociálně-zdravotním pomezí.</p></div>
+    </section>
+    ${srcHtml("Zdroj: časopis Sociální služby (APSS ČR), ročníky 2023–2025, zpracováno ve wiki CARE 2035; čísla ověřit v původních článcích. Asistivní technologie, certifikační autorita, půjčovny a GDPR: Sociální služby 2023–2025 (série „Technologie v sociálních službách“). Zákon o sociálně-zdravotním pomezí účinný od 1. 3. 2025, chybějící prováděcí vyhlášky: Sociální služby 2025. Vyhláška č. 388/2011 Sb. a údaj „0 Kč z veřejných peněz“: teze týmu CARE 2035, v časopise neuvedeno, údaj k ověření. EU: EU Care Strategy (2024) podle Sociálních služeb, ~52 mil. pečujících; „potřeba 2050 = 52 + 10 mil.“ je vlastní zjednodušení (při stejném počtu pečujících). 1,2 mil. live-in pečovatelek: Sociální služby 2025, téma stárnutí.")}`,
+
+  "finance-nelegalni": () => `
+    ${leadHtml("Nelegální domovy pro seniory <em>fungují dál</em>", "„Kdyby někdo šílel, tak prostě pět kapek.“ Tak popsala laická pečovatelka podávání haloperidolu v nelegálním domově. Na místo v registrovaném zařízení čeká kolem 30 tisíc žádostí.")}
+    ${crow("01 · Co najde ombudsman", "Ve všech devíti navštívených neregistrovaných zařízeních zjistil ombudsman špatné zacházení.",
+      bigStat("9 z 9", "neregistrovaných zařízení (2012–2014) se špatným zacházením; v roce 2026 našel totéž ve třech dalších"),
+      `<p class="cnote">Návštěvy Veřejného ochránce práv v neregistrovaných zařízeních.</p>${legendHtml([["b", "špatné zacházení zjištěno"], ["dash", "2026: dál v provozu"]])}
+      <div role="img" aria-label="Ombudsman v letech 2012–2014 zjistil špatné zacházení ve všech 9 neregistrovaných zařízeních; v roce 2026 tři další fungují dál">
+        <p class="hh">2012–2014: navštívená neregistrovaná zařízení</p>
+        <div class="houses">${house(true).repeat(9)}</div>
+        <p class="hb-strong">ve všech 9 zjištěno špatné zacházení</p>
+        <p class="hh" style="margin-top:22px;padding-top:14px;border-top:1px solid var(--line)">2026: zveřejněná zařízení</p>
+        <div class="houses">${house(false).repeat(3)}</div>
+        <p style="margin-top:10px;font-size:15px"><b>Mutěnice, Svitavy, České Budějovice:</b> <span style="color:var(--ink-2)">žádné se nezaregistrovalo ani nezavřelo</span></p>
+      </div>`)}
+    ${crow("02 · Jak stát zasahuje", "Stát o nelegálních domovech ví, ale pravomocně skončí jen zlomek řízení.",
+      bigStat("~100", "odhad neregistrovaných zařízení v roce 2016, zhruba každý devátý domov vedle 800 registrovaných"),
+      `<p class="cnote">Nelegální poskytování pobytových služeb: odhad a správní řízení krajů.</p>${legendHtml([["dash", "odhad"], ["", "řízení"], ["b", "pravomocně ukončená"]])}
+      ${hbarsHtml([["odhad nelegálních zařízení (2016)", 100, "dash", "~100"], ["zahájená řízení (do 2015)", 44], ["ukončená řízení (do 2015)", 26], ["pravomocně ukončená (do 2018)", 3, "b"]], 100, v => String(v))}
+      <p class="cnote" style="margin-top:10px">Počty se liší podle zdroje a roku: 2015 MPSV, 2018 jiný zdroj; srovnání je orientační.</p>`)}
+    ${crow("03 · Jak dlouho", "Ombudsman na nelegální domovy upozorňuje od roku 2008. Vyšší pokuty problém nevyřešily.",
+      bigStat("18 let", "od první souhrnné zprávy ombudsmana (2008) po zařízení zveřejněná v roce 2026"),
+      `<p class="cnote">Klíčové kroky 2008–2026.</p><div class="tl-band">18 let: nelegální domovy fungují dál</div>
+      <ol class="tl">
+        <li><span class="y">2008</span><b>souhrnná zpráva ombudsmana</b><span>o soukromých zařízeních</span></li>
+        <li><span class="y">2012–2014</span><b>návštěvy 9 zařízení</b><span>ve všech špatné zacházení</span></li>
+        <li><span class="y">2016</span><b>pokuta za nelegální provoz až 2 mil. Kč</b><span>novela zákona o sociálních službách</span></li>
+        <li><span class="y">2024</span><b>nová série návštěv</b><span>neregistrovaných zařízení</span></li>
+        <li class="b"><span class="y">2026</span><b>3 domovy zveřejněny</b><span>přestupek „špatné zacházení“ od 1. 1. 2026</span></li>
+      </ol>`)}
+    ${srcHtml("Zdroje: Veřejný ochránce práv: Návštěvy neregistrovaných zařízení (2024; série 2012–2014, 9 zařízení, špatné zacházení ve všech); zprávy o zařízeních Mutěnice, Svitavy, České Budějovice podle Advokátního deníku (7. 7. 2026) a Finance.cz (29. 6. 2026), citát pečovatelky tamtéž; souhrnná zpráva VOP ze soukromých zařízení pro seniory (2008). Odhad ~100 zařízení, 506 DS + 294 DZR, 44 zahájených a 26 ukončených řízení do konce 2015: MPSV podle Blesk.cz (26. 2. 2016); 3 pravomocně ukončená řízení do konce 2018: BusinessInfo.cz; údaje z různých let a zdrojů, srovnání orientační, aktuální počet je třeba ověřit u MPSV a krajů. Pokuta 2 mil. Kč: novela zákona o sociálních službách (2016/2017). ~30 tis. žádostí: ČT24, rok je třeba ověřit. „Každý devátý“ = 100 / (800 + 100), vlastní dopočet.")}`
+};
+
+const SUBPAGES_D = {
+  "obce-velikost": () => `
+    <section class="hero-n"><div class="big num">1 710</div><p>${nb("obyvatel má průměrná česká obec. Průměr EU je 22 455.")}</p></section>
+    ${leadHtml("Česká obec je v průměru <em>13×</em> menší než evropská.", "Péči o stárnoucí obyvatele tak zajišťuje 6 258 samospráv. Pětina z nich má méně než 200 obyvatel.")}
+    <section class="sec-full">
+      <div class="mono">01 · Průměrná velikost obce, výběr zemí EU</div>
+      <h2>Ze srovnávaných zemí má Česko nejmenší průměrnou obec.</h2>
+      <p class="cnote">Obyvatel na obec.</p>
+      <div role="img" aria-label="Průměrný počet obyvatel na obec: Dánsko 59 591, Nizozemsko 49 548, Litva 46 583, průměr EU 22 455, Francie 1 928, Slovensko 1 865, Česko 1 710.">
+      ${hbarsHtml([["Dánsko", 59591], ["Nizozemsko", 49548], ["Litva", 46583], ["Průměr EU", 22455, "ref"], ["Francie", 1928], ["Slovensko", 1865], ["Česko", 1710, "b"]], 60000, v => fmt(v))}</div>
+    </section>
+    <div class="tiles num wide">
+      <div class="tile b"><b>21,5 %</b><span>obcí má méně než 200 obyvatel</span></div>
+      <div class="tile"><b>1,5 %</b><span>obyvatel Česka v těchto obcích žije</span></div>
+      <div class="tile"><b>22,8 %</b><span>obyvatel žije v šesti městech nad 100 tisíc</span></div>
+    </div>
+    ${srcHtml("Zdroje: ČSÚ, Struktura území podle počtu obyvatel, stav k 31. 12. 2025 (6 258 obcí; podíly obcí a obyvatel podle velikosti). European Local Government Report 2025: průměrný počet obyvatel na obec, výpočet z profilů OECD/UCLG za rok 2022 (nejde o přímý ukazatel Eurostatu); graf ukazuje jen země uvedené ve zprávě jako krajní případy. 13× je vlastní výpočet: 22 455 ÷ 1 710 ≈ 13,1. „Obec“ není v EU jednotná správní jednotka (Eurostat srovnává jednotky LAU), srovnání je proto orientační.")}`,
+
+  "obce-kilometry": () => `
+    ${leadHtml("Péče do malých obcí stojí kilometry, které musí někdo zaplatit.", "Kraje proto započítávají dojíždění do vyrovnávací platby a po obcích chtějí spolufinancování.")}
+    <div class="tiles num wide">
+      <div class="tile b"><b>18 %</b><span>vyrovnávací platby služeb pro seniory hradí obce (Královéhradecký kraj)</span></div>
+      <div class="tile"><b>100 %</b><span>cíl pokrytí terénní pečovatelskou službou ve jmenovitě uvedených obcích (Karlovarský kraj)</span></div>
+      <div class="tile dot"><b>?</b><span>kolik stojí dojíždění do malých obcí, krajské plány nevyčíslují</span></div>
+    </div>
+    <section class="sec-full">
+      <div class="mono">01 · Kdo platí</div>
+      <h2>Obce nesou necelou pětinu platby za služby pro seniory.</h2>
+      <div role="img" aria-label="Vyrovnávací platba služeb pro seniory v Královéhradeckém kraji: obce 18 %, ostatní zdroje 82 %.">
+      ${stackHtml([["", [[18, "b", "Obce 18 %"], [82, "", "Ostatní zdroje 82 %"]]]], "wide")}</div>
+      <p class="cnote">stát (dotace MPSV), kraj, úhrady klientů, zdravotní pojišťovny, fondy EU · podíly jednotlivých zdrojů data neuvádějí</p>
+    </section>
+    <section class="sec-full">
+      <div class="mono">02 · Co ze služby vypadává</div>
+      <h2>Úkony, které jde koupit komerčně, pečovatelská služba omezuje.</h2>
+      <div class="struck"><s>dovoz obědů</s><s>úklid</s><s>praní</s></div>
+      <p style="font-size:18px;line-height:1.5;max-width:60ch">Chudí a venkovští senioři si ale komerční náhradu dovolit nemohou. Plošné omezení je tak vytlačuje ze systému.</p>
+    </section>
+    ${srcHtml("Zdroje: střednědobé plány rozvoje sociálních služeb krajů ve wiki CARE 2035 (Financování; Pověření a vyrovnávací platba; Dostupnost): Královéhradecký kraj (18 % a zohlednění dojíždění do malých obcí ve vyrovnávací platbě), Karlovarský kraj (100% pokrytí). Podíl 18 % platí jen pro služby pro seniory v Královéhradeckém kraji; rozpad zbylých 82 % podle zdrojů wiki neuvádí. „Černá listina“ úkonů a dopad na venkovské seniory: časopis Sociální služby 1/2025, Pavel Čáslava. Prázdná dlaždice: údaj ve zpracovaných plánech chybí.")}`,
+
+  "obce-posledni-ves": () => `
+    ${leadHtml("Kdo dojede do poslední vsi?", "Kraje slibují terénní péči i tam, kde žádný poskytovatel nesídlí. Pracovníci ale chybějí a <em>odcházejí</em>.")}
+    <div class="tiles num wide">
+      <div class="tile b"><b>3 019</b><span>pracovníků chybí v sociálních službách (kvalifikovaný odhad)</span></div>
+      <div class="tile"><b>18 %</b><span>roční fluktuace v přímé péči, v některých krajích až 26 %</span></div>
+      <div class="tile"><b>31 %</b><span>zaměstnanců je spokojeno s platem</span></div>
+    </div>
+    <section class="sec-full">
+      <div class="mono">Roční fluktuace pracovníků</div>
+      <div role="img" aria-label="Roční fluktuace pracovníků: průměr 15 %, přímá péče 18 %, v nejhorších krajích až 26 %.">
+      ${hbarsHtml([["Průměr všech oborů", 15], ["Přímá péče, celá ČR", 18, "b"], ["Přímá péče, nejhorší kraje", 26, "lt", "až 26 %"]], 30)}</div>
+    </section>
+    <section class="two tops">
+      <div><h3>Co kraje zkoušejí</h3><ul>
+        <li><b>Karlovarský kraj:</b> 100% pokrytí terénní pečovatelskou službou ve jmenovitě uvedených obcích a bonifikace za večery a víkendy.</li>
+        <li><b>Královéhradecký kraj:</b> dojíždění do malých obcí započítává do vyrovnávací platby.</li>
+        <li><b>Kraj Vysočina:</b> telemedicína a půjčovny pomůcek.</li></ul></div>
+      <div><h3>Kde to naráží</h3><ul>
+        <li>Terénní pracovník přichází do domácnosti zpravidla <b>sám</b>, bez týmu.</li>
+        <li>Telemedicína je pro seniory s demencí obtížná, chtějí osobní kontakt.</li>
+        <li>Pracovní síla stárne: v přímé péči je průměrný věk o 3 roky vyšší než u ekonomicky aktivních.</li></ul></div>
+    </section>
+    ${srcHtml("Zdroje: APSS ČR, šetření 1/2025 (625 zařízení): kvalifikovaný odhad 3 019 chybějících pracovníků, fluktuace v přímé péči 18 %, v některých krajích až 26 %. APSS ČR a IRESOFT, průzkum 2025 (14 245 zaměstnanců, 690 zařízení): 31 % spokojeno s platem. Průměr všech oborů 15 % je odvozen z údaje „o 3 p. b. nad celostátním průměrem“. Krajské střednědobé plány ve wiki CARE 2035 (Dostupnost; Terénní vs. pobytové služby). Časopis Sociální služby 2025 (Pracovníci; Terénní a pobytové služby; Technologie).")}`
+};
+
+const SUBPAGES = {
+  "demografie-populace": () => `
+    <section class="hero">
+      <div>
+        <h2 class="poster-h num">1 ze 4</h2>
+        <p class="poster-sub">Téměř každý čtvrtý člověk nad 80 let dnes využívá sociální služby dlouhodobé péče.</p>
+      </div>
+      ${figure(1)}
+    </section>
+    <section class="sec-h"><h2 class="poster-h" style="font-size:clamp(34px,5vw,64px)">Demografický zlom <span class="soft">2027–2037</span></h2></section>
+    <section class="row chart-row" style="border-top:1px solid var(--ink)">
+      <div><div class="label mono">01 · Jak rychle</div><h2>Lidé ve věku 80+ se do roku 2050 téměř zdvojnásobí.</h2>
+        <div class="big num">×1,83</div><p class="big-cap">počet lidí 80+ v roce 2050 oproti roku 2025</p></div>
+      <div><div class="legend"><span><i class="b line"></i>80+ let</span><span><i class="line"></i>65–69, 70–74, 75–79 let</span><span class="mono">index 2025 = 100</span></div>
+        <div class="chart-scroll d-only">${svg("svg-rust")}</div><div class="m-only">${mRust()}</div></div>
+    </section>
+    <section class="row chart-row">
+      <div><div class="label mono">02 · Kdy nejvíc</div><h2>Mezi lety 2027 a 2037 přibývá každý rok až 40 tisíc lidí starších 80 let.</h2>
+        <div class="big num">+315 tis.</div><p class="big-cap">lidí 80+ přibude během deseti let zlomu, v průměru 78 denně</p></div>
+      <div><div class="legend"><span><i class="b"></i>přírůstek v letech zlomu</span><span><i></i>ostatní roky</span></div>
+        <div class="chart-scroll d-only">${svg("svg-prirustek")}</div><div class="m-only">${mPrirustek()}</div></div>
+    </section>
+    <section class="row chart-row">
+      <div><div class="label mono">03 · Co to znamená pro péči</div><h2>Téměř každý 4. člověk nad 80 let dnes využívá sociální služby dlouhodobé péče.</h2>
+        <div class="big num">+59 %</div><p class="big-cap">klientů v roce 2035 při zachování dnešního podílu</p></div>
+      <div><div class="legend"><span><i class="b"></i>využívá služby (~24 %)</span><span><i></i>ostatní osoby 80+</span></div>
+        <div class="chart-scroll d-only">${svg("svg-klienti")}</div><div class="m-only">${mKlienti()}</div></div>
+    </section>
+    <p class="src">Zdroj: ČSÚ, Projekce obyvatelstva ČR 2024. Hodnoty 2026–2050 jsou odečteny z grafu projekce (ukotveno: 2025 = 519 802, 2035 = 824 000). Podíl klientů 24 % („téměř každý 4.“) je držen konstantní; jde o ilustrativní odhad.</p>`,
+
+  "demografie-pece": () => `
+    <section class="lead-row">
+      <h2 class="poster-h">Kdo se postará o stárnoucí Česko?</h2>
+      <p class="poster-sub" style="max-width:44ch">Systém bude vyžadovat minimálně <em class="num">19 613</em> pečujících v sociálních službách.</p>
+    </section>
+    <section class="sec-h" style="border-top:1px solid var(--ink)">
+      <div class="label mono" style="margin-bottom:14px">01 · Kolik lidí chybí</div>
+      <h2 style="font-size:clamp(26px,3.2vw,42px);font-weight:600">Do roku 2035 bude potřeba zhruba 28 400 úvazků navíc, polovinu z nich u pečujících pracovníků</h2>
+      <div class="trio num">
+        <div class="b"><b>+28 400</b><span>úvazků navíc do roku 2035 (+38 %)</span></div>
+        <div><b>+33 100</b><span>úvazků navíc do roku 2040 (+44 %)</span></div>
+        <div><b>+43 200</b><span>úvazků navíc do roku 2050 (+58 %)</span></div>
+      </div>
+      <div class="legend"><span><i class="b"></i>tři profese s největším nárůstem (84 %)</span><span><i></i>ostatní profese</span><span class="mono">nárůst úvazků 2024–2035</span></div>
+      <div class="chart-scroll wide d-only">${svg("svg-uvazky")}</div><div class="m-only">${mUvazky()}</div>
+    </section>
+    <section class="two">
+      <div><div class="mono">02 · Personál</div><h3>Personální krize a nedocenění pečovatelské práce</h3>
+        <p>Česko čelí akutnímu nedostatku personálu, který je způsoben nízkým finančním ohodnocením a nízkou společenskou prestiží této profese. To vše vede k vysoké fluktuaci a snižuje dlouhodobou udržitelnost tohoto povolání.</p></div>
+      <div><div class="mono">03 · Model péče</div><h3>Transformace modelu péče a podpora rodin</h3>
+        <p>Důraz se musí nevyhnutelně přesunout z akutní nemocniční péče do péče komunitní a domácí. Stěžejní roli sehrají neformální pečující (často rodinní příslušníci), kteří už dnes státu šetří obrovské prostředky.</p></div>
+    </section>
+    <p class="src">Zdroj: Výkazy poskytovatelů sociálních služeb 2024, predikce ČSÚ, vlastní zpracování. Přesné jsou nárůsty do roku 2035 u tří největších profesí (14 884, 5 521, 3 457); ostatní hodnoty jsou odečteny z grafu a zaokrouhleny.</p>`,
+
+  "demografie-geriatri": () => `
+    <section class="lead-row">
+      <h2 class="poster-h">Potřebujeme přes 1 000 geriatrů. Máme jich asi <em>350</em>.</h2>
+      <p class="poster-sub" style="max-width:44ch">A třetina z nich odejde do důchodu do pěti let.</p>
+    </section>
+    <div class="trio num" style="border-top:1px solid var(--ink);padding-top:28px;margin-top:0">
+      <div class="b"><b>232</b><span>zůstává aktivních</span></div>
+      <div class="l"><b>~116</b><span>odchází do 5 let</span></div>
+      <div class="dot"><b><small>nejméně</small>650</b><span>chybí</span></div>
+    </div>
+    <div class="ger">${svg("svg-geriatri")}</div>
+    <p class="statement">Geriatr je lékař pro starší lidi s více nemocemi najednou. Komplexní <b>geriatrická péče pomáhá lidem zůstat déle doma</b> a o pětinu snižuje přijetí do domovů pro seniory. Život neprodlužuje, ale drží soběstačnost. Jenže právě těchto specialistů je málo, a ubývá jich.</p>
+    <p class="src">Zdroje: L. Dušek, ÚZIS, ČT24; H. Vaňková, ČGGS, Zdravotnický deník 3/2026 (348 aktivních geriatrů); Cochrane, Ellis et al. 2017. Odhad potřeby je dolní mez („přes tisíc“). Podíl 116 = třetina z 348, vlastní přepočet.</p>`
+};
+
+function subPage(b, s) {
+  const items = barrierItems();
+  const flat = [{ href: b.id, t: b.title }, ...b.subs.map(x => ({ href: x.id, t: x.t }))];
+  const i = flat.findIndex(x => x.href === s.id);
+  const next = flat[i + 1] || (() => { const nb = BARRIERS[BARRIERS.indexOf(b) + 1]; return nb && { href: nb.id, t: nb.title }; })();
+  return `
+  ${band(`<a class="crumb" href="#bariery">Mapa kritických bariér a rizik</a> · <a class="crumb" href="#${b.id}">${b.k} · ${b.title}</a>`, s.short, b.facts[s.fact].replace(/<\/?strong>/g, ""), pillarMosaic(b.id, s.id))}
+  <div class="wrap split">
+    ${side("Bariéry a rizika", items, s.id)}
+    <div>${(SUBPAGES[s.id] || SUBPAGES_B[s.id] || SUBPAGES_C[s.id] || SUBPAGES_D[s.id])()}${pager(flat[i - 1], next)}</div>
+  </div>
+  ${casopis(s.id)}
+  ${kraje(s.id)}`;
+}
+
+const drawer = document.getElementById("drawer"), menuBtn = document.getElementById("menu-btn");
+function setMenu(open) {
+  menuBtn.setAttribute("aria-expanded", String(open));
+  document.getElementById("menu-label").textContent = open ? "Zavřít" : "Menu";
+  drawer.hidden = !open;
+}
+menuBtn.addEventListener("click", () => setMenu(drawer.hidden));
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !drawer.hidden) { setMenu(false); menuBtn.focus(); } });
+function renderDrawer(current) {
+  const a = (href, k, t, cls = "", pl = "") => `<a href="#${href}" class="${cls}" ${pl ? `data-pillar="${pl}"` : ""} ${href === current ? 'aria-current="true"' : ""}><span class="k">${k}</span><span>${t}</span></a>`;
+  drawer.innerHTML = `<div class="wrap"><div>
+    <a class="top-link" href="#uvod" ${current === "uvod" ? 'aria-current="true"' : ""}>Přehled</a>
+    <h4>Výchozí stav</h4>${a("bariery", "—", "Mapa kritických bariér a rizik")}
+    ${BARRIERS.map(b => a(b.id, b.k, b.title, "", b.id) + (b.subs || []).map((s, j) => a(s.id, b.k + (j + 1), s.short, "child", b.id)).join("")).join("")}
+    <h4>Horizont 2035</h4>${a("vyzvy", "—", "Designové výzvy")}
+    ${CHALLENGES.map(c => a("vyzva-" + c.n, "V" + c.n, c.title)).join("")}
+  </div></div>`;
+}
+
+function render() {
+  const h = (location.hash || "#uvod").slice(1);
+  let html, sec = "uvod", pillar = "";
+  if (h === "bariery") { html = barriersPage(); sec = "bariery"; }
+  else if (h === "vyzvy") { html = challengesPage(); sec = "vyzvy"; }
+  else if (byId(h)) { html = barrierPage(byId(h)); sec = "bariery"; pillar = h; }
+  else if (BARRIERS.some(b => (b.subs || []).some(s => s.id === h))) {
+    const b = BARRIERS.find(b => (b.subs || []).some(s => s.id === h));
+    html = subPage(b, b.subs.find(s => s.id === h)); sec = "bariery"; pillar = b.id;
+  }
+  else if (/^vyzva-[1-6]$/.test(h)) { html = challengePage(CHALLENGES[+h.slice(6) - 1]); sec = "vyzvy"; }
+  else html = home();
+  app.innerHTML = `<main ${pillar ? `data-pillar="${pillar}"` : ""}>${html}</main>`;
+  document.querySelectorAll(".nav a").forEach(a => { if (a.dataset.sec === sec) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+  renderDrawer(h || "uvod");
+  setMenu(false);
+  document.querySelectorAll(".pill-row").forEach(row => {
+    const act = row.querySelector('[aria-current="true"], .parent');
+    if (act && row.scrollWidth > row.clientWidth) row.scrollLeft = act.offsetLeft - row.offsetLeft - 24;
+  });
+  window.scrollTo(0, 0);
+}
+document.getElementById("sig").innerHTML = signature();
+window.addEventListener("hashchange", render);
+render();
+</script>
+
+</html>
