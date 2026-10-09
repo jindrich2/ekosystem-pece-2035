@@ -92,13 +92,13 @@ p { margin: 0; }
 .meta { padding-block: 22px 0; color: var(--ink-2); }
 
 /* Blue band (poster header) */
-.band { background: var(--accent); color: var(--on-accent); margin-top: 22px; }
+.band { background: var(--shade); color: var(--ink); margin-top: 22px; overflow: hidden; }
 .band .wrap { padding-block: clamp(28px, 5vw, 56px); display: grid; gap: 10px; }
-.band .kicker { font-size: clamp(16px, 1.8vw, 21px); font-weight: 500; opacity: 0.92; }
+.band .kicker { font-size: clamp(16px, 1.8vw, 21px); font-weight: 500; color: var(--ink-2); }
 .band h1 { font-size: clamp(34px, 5.6vw, 72px); font-weight: 700; }
-.band .lede { max-width: 62ch; font-size: clamp(17px, 1.6vw, 20px); opacity: 0.92; margin-top: 8px; }
-.crumb { color: var(--on-accent); opacity: 0.85; text-decoration: none; }
-.crumb:hover { opacity: 1; text-decoration: underline; }
+.band .lede { max-width: 62ch; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); margin-top: 8px; }
+.crumb { color: var(--ink-2); text-decoration: none; }
+.crumb:hover { color: var(--ink); text-decoration: underline; }
 
 /* Rows */
 main { padding-bottom: 72px; }
@@ -106,6 +106,7 @@ main { padding-bottom: 72px; }
 .row:first-child { border-top: 0; }
 .row > * { min-width: 0; }
 .row .label { color: var(--ink-2); margin-bottom: 14px; }
+.row .row-note { color: var(--ink-2); font-size: 16px; line-height: 1.55; margin-top: 16px; max-width: 42ch; }
 .row h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 600; }
 .big { font-family: var(--display); font-weight: 700; color: var(--accent-ink); font-size: clamp(56px, 8vw, 104px); line-height: 0.95; letter-spacing: -0.04em; margin-top: 22px; }
 .big-cap { color: var(--ink-2); font-size: 15px; margin-top: 8px; max-width: 34ch; }
@@ -482,6 +483,12 @@ a.tag:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
 .poly .t { font-size: 14px; line-height: 1.3; color: var(--ink-2); overflow-wrap: anywhere; }
 .poly a:hover .t { color: var(--ink); }
 .sig { display: block; width: 100%; height: 10px; }
+/* Square motif: fixed-size squares, rows clipped at the right edge */
+.sq { --sq: clamp(9px, 1.05vw, 15px); --sq-gap: 3px; display: grid; gap: var(--sq-gap); overflow: hidden; }
+.sq-r { display: flex; gap: var(--sq-gap); }
+.sq-r i { flex: none; width: var(--sq); height: var(--sq); }
+.band .sq { margin-top: clamp(4px, 1vw, 12px); }
+.sq-foot { --sq: 10px; --sq-gap: 3px; }
 @media (max-width: 900px) { .bridge { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 760px) {
   .band.has-art .wrap { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
@@ -819,11 +826,27 @@ const byId = id => BARRIERS.find(b => b.id === id);
 const chTitle = c => c.title + (c.sub ? " (" + c.sub + ")" : "");
 
 const nb = t => t.replace(/(\d) (?=\d{3}\b)/g, "$1\u00a0").replace(/(\d) (%|Kč|h\b|tis\.|p\. b\.)/g, "$1\u00a0$2");
-// Hero bands stay text-only on every page; the graphic `art` argument is ignored.
+// Hero: grey band, black type, and the square line from the footer grown into the page's main motif.
+// Three rows of squares rise from the bottom edge (sparse → dense) in the colours of the page's pillar(s).
+let heroTheme = null, heroSeed = "uvod";
+const setHero = (ids, seed) => { heroTheme = ids; heroSeed = seed; };
+const SQ_GREY = "#c9ced6";
+function squarePalette(ids) {
+  const set = ids || Object.keys(PAL);
+  const one = set.length === 1;
+  return [...set.flatMap(id => one
+    ? [[PAL[id].a, 4], [PAL[id].l, 2.2], [PAL[id].d, 1.2]]
+    : [[PAL[id].a, 3], [PAL[id].l, 1.2]]), [SQ_GREY, one ? 1.2 : 0.8]];
+}
+function squares(seed, ids, density = [0.16, 0.42, 0.86], cols = 140) {
+  const r = rng(hash("sq:" + seed)), pal = squarePalette(ids);
+  return `<div class="sq" aria-hidden="true">${density.map(d =>
+    `<div class="sq-r">${Array.from({ length: cols }, () => r() < d ? `<i style="background:${pick(r, pal)}"></i>` : "<i></i>").join("")}</div>`).join("")}</div>`;
+}
 function band(kicker, title, lede, art = "", cls = "") {
   return `<section class="band ${cls}"><div class="wrap">
     <div class="txt"><div class="kicker">${kicker}</div><h1>${title}</h1>${lede ? `<p class="lede">${nb(lede)}</p>` : ""}</div>
-  </div></section>`;
+  </div>${squares(heroSeed, heroTheme)}</section>`;
 }
 
 // Graphic elements. Seeded so every page always draws the same composition.
@@ -894,26 +917,11 @@ function challengeIndex() {
 }
 
 function home() {
+  setHero(null, "uvod");
   return `
   ${band("Draft akčního plánu", "Udržitelný ekosystém péče 2035",
     "V roce 2035 zasáhne Česko demografický náraz. Silné ročníky odejdou do důchodu a péče o stárnoucí rodiče dopadne na rodiny, které už dnes nesou většinu její tíhy. Tento web shrnuje výchozí stav a šest designových výzev pro workshopy CARE.", waveStripes(), "lead")}
   <div class="wrap">
-    <div class="stats num" style="margin-top:40px">
-      <div class="stat" data-pillar="demografie"><b>824 tis.</b><span>lidí ve věku 80+ v roce 2035 (dnes 520 tis.)</span></div>
-      <div class="stat" data-pillar="pecujici"><b>800 tis.</b><span>neformálních pečujících drží systém nad vodou</span></div>
-      <div class="stat" data-pillar="pecujici"><b>80 %</b><span>veškeré péče poskytují rodiny a blízcí</span></div>
-      <div class="stat" data-pillar="demografie"><b>34 700</b><span>nových lůžek by bylo třeba bez změny modelu</span></div>
-    </div>
-    <section class="row" style="border-top:1px solid var(--ink)">
-      <div>
-        <div class="label mono">Jak s webem pracovat</div>
-        <h2>Designová výzva není hotové řešení.</h2>
-      </div>
-      <div class="prose">
-        <p>Výzva je přesná formulace problému, například jak sjednotit roztříštěný systém péče nebo jak chránit sendvičovou generaci před ekonomickým propadem. Otevírá cílený prostor pro hledání aplikovatelných řešení.</p>
-        <p>Před workshopem se zaměřte hlavně na sekci <a href="#vyzvy">Designové výzvy</a>. Mapa bariér a rizik popisuje, z čeho výzvy vycházejí.</p>
-      </div>
-    </section>
     <section class="row">
       <div>
         <div class="label mono">Výchozí stav · 4 oblasti</div>
@@ -925,6 +933,7 @@ function home() {
       <div>
         <div class="label mono">Horizont 2035 · 6 výzev</div>
         <h2><a href="#vyzvy" style="text-decoration:none">Designové výzvy pro neformální péči</a></h2>
+        <p class="row-note">Výzva je přesná formulace problému, například jak sjednotit roztříštěný systém péče nebo jak chránit sendvičovou generaci před ekonomickým propadem. Otevírá cílený prostor pro hledání aplikovatelných řešení.</p>
       </div>
       ${challengeIndex()}
     </section>
@@ -954,12 +963,14 @@ function home() {
 }
 
 function barriersPage() {
+  setHero(null, "bariery");
   return `
   ${band("Výchozí stav", "Mapa kritických bariér a rizik", "Čtyři oblasti, ve kterých dnešní systém péče selhává nebo brzy selže. Známe je z dat a z praxe a vycházejí z nich designové výzvy.", mixMosaic(BARRIERS.map(b => b.id), "bariery"))}
   <div class="wrap"><section class="row"><div><div class="label mono">4 oblasti</div><h2>Co víme o výchozím stavu</h2></div>${barrierIndex()}</section></div>`;
 }
 
 function challengesPage() {
+  setHero(null, "vyzvy");
   return `
   ${band("Horizont 2035", "Designové výzvy pro neformální péči", "Šest přesně formulovaných problémů ve formě otázky „Jak bychom mohli…“. Každá výzva otevírá prostor pro řešení a navazuje na konkrétní bariéry výchozího stavu.", `<div class="art-cap"><span>V1–V6</span><span>barvy podle bariér</span></div>` + rects(41, 4, CHALLENGES.flatMap((c, g) => { const r = rng(hash("V" + c.n)); const out = []; for (let y = 0; y < 4; y++) for (let x = 0; x < 6; x++) if (r() > 0.2) out.push([g * 7 + x, y, 1, 1, pick(r, c.barriers.flatMap(id => [[PAL[id].a, 3], [PAL[id].l, 1.6], [PAL[id].d, 1.2]]))]); return out; })))}
   <div class="wrap"><section class="row"><div><div class="label mono">6 výzev</div><h2>Na co se zaměřit na workshopu</h2></div>${challengeIndex()}</section></div>`;
@@ -991,6 +1002,7 @@ function pager(prev, next) {
 }
 
 function barrierPage(b) {
+  setHero([b.id], b.id);
   const i = BARRIERS.indexOf(b);
   const items = barrierItems();
   const subFor = n => (b.subs || []).filter(s => s.fact === n || (s.also || []).includes(n));
@@ -1022,6 +1034,7 @@ function barrierPage(b) {
 }
 
 function challengePage(c) {
+  setHero(c.barriers, "vyzva-" + c.n);
   const items = CHALLENGES.map(x => ({ href: "vyzva-" + x.n, k: "V" + x.n, t: x.title, short: x.short }));
   const i = c.n - 1;
   return `
@@ -1417,6 +1430,7 @@ const SUBPAGES = {
 };
 
 function subPage(b, s) {
+  setHero([b.id], s.id);
   const items = barrierItems();
   const flat = [{ href: b.id, t: b.title }, ...b.subs.map(x => ({ href: x.id, t: x.t }))];
   const i = flat.findIndex(x => x.href === s.id);
@@ -1472,7 +1486,7 @@ function render() {
   });
   window.scrollTo(0, 0);
 }
-document.getElementById("sig").innerHTML = signature();
+document.getElementById("sig").innerHTML = squares("CARE 2035", null, [0.82], 160).replace('class="sq"', 'class="sq sq-foot"');
 window.addEventListener("hashchange", render);
 render();
 </script>
