@@ -83,12 +83,26 @@ p { margin: 0; }
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
 .brand { text-decoration: none; display: flex; align-items: baseline; gap: 10px; }
-.brand b { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-.brand span { color: var(--accent-ink); font-weight: 700; font-family: var(--display); font-size: 18px; }
-.nav { display: flex; gap: 4px; flex-wrap: wrap; }
-.nav a { text-decoration: none; font-size: 15px; font-weight: 500; padding: 6px 12px; border-radius: 999px; color: var(--ink-2); }
-.nav a:hover { color: var(--ink); background: var(--accent-wash); }
-.nav a[aria-current="true"] { color: var(--on-accent); background: var(--accent); }
+/* Cap height of Instrument Sans is 0.72 em: 26.4px type gives 19px capitals, the height of the square digits */
+.brand b { font-family: var(--display); font-size: 26.4px; line-height: 1; font-weight: 700; letter-spacing: -0.02em; }
+/* Logo: "2035" set in the square motif, 3 × 5 squares per digit, one pillar colour per digit (A 2 · B 0 · C 3 · D 5) */
+.brand .yr { display: block; height: 19px; width: auto; overflow: visible; }
+.brand .yr g { fill: var(--accent); transition: transform .25s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--d) * 40ms); }
+.brand:hover .yr g, .brand:focus-visible .yr g { transform: translateY(-3px); }
+.brand:hover .yr g:nth-child(even), .brand:focus-visible .yr g:nth-child(even) { transform: translateY(-1px); }
+.brand:active .yr g { transform: none; transition-delay: 0s; }
+@media (prefers-reduced-motion: reduce) { .brand .yr g { transition: none; } }
+.nav { display: flex; gap: clamp(14px, 2vw, 28px); flex-wrap: wrap; }
+/* Main nav: the square motif as an underline. Squares rise one after another on hover, sit fully on the current page, and stretch taller on press. */
+.nav a { position: relative; text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 0 14px; color: var(--ink-2); transition: color .2s ease; }
+.nav a:hover, .nav a:focus-visible { color: var(--ink); }
+.nav a[aria-current="true"] { color: var(--ink); font-weight: 600; }
+.usq { position: absolute; left: 0; right: 0; bottom: 2px; height: 8px; display: flex; align-items: flex-end; gap: 2px; overflow: hidden; pointer-events: none; }
+.usq i { flex: none; width: 6px; height: 6px; transform: scaleY(0); transform-origin: bottom; transition: transform .22s cubic-bezier(.2, .8, .2, 1), height .12s ease; transition-delay: calc(var(--i) * 22ms); }
+.nav a:hover .usq i, .nav a:focus-visible .usq i, .nav a[aria-current="true"] .usq i { transform: scaleY(1); }
+.nav a:not([aria-current="true"]):hover .usq i:nth-child(3n + 2) { transform: scaleY(0); }
+.nav a:active .usq i { height: 8px; transition-delay: 0s; }
+@media (prefers-reduced-motion: reduce) { .usq i { transition: none; } }
 .meta { padding-block: 22px 0; color: var(--ink-2); }
 
 /* Blue band (poster header) */
@@ -106,6 +120,10 @@ main { padding-bottom: 72px; }
 .row:first-child { border-top: 0; }
 .row > * { min-width: 0; }
 .row .label { color: var(--ink-2); margin-bottom: 14px; }
+/* Two-column rows: the left heading column stays in view while the right-hand content scrolls past */
+@media (min-width: 901px) {
+  .row > div:first-child { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 88px); align-self: start; }
+}
 .row .row-note { color: var(--ink-2); font-size: 16px; line-height: 1.55; margin-top: 16px; max-width: 42ch; }
 .row h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 600; }
 .big { font-family: var(--display); font-weight: 700; color: var(--accent-ink); font-size: clamp(56px, 8vw, 104px); line-height: 0.95; letter-spacing: -0.04em; margin-top: 22px; }
@@ -217,7 +235,7 @@ a.tag:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
 .legend i.dash { background: transparent; border: 2px dashed var(--accent-ink); }
 .hc { display: grid; gap: 10px; container-type: inline-size; }
 .split > div:last-child { container-type: inline-size; min-width: 0; }
-@container (max-width: 760px) { .split .row.chart-row { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+@container (max-width: 760px) { .split .row.chart-row { grid-template-columns: minmax(0, 1fr); gap: 20px; } .split .row.chart-row > div:first-child { position: static; } }
 @container (max-width: 460px) {
   .hb, .db, .sk { grid-template-columns: minmax(0, 1fr); }
   .hb .l, .db .l, .sk .l { text-align: left; }
@@ -508,7 +526,7 @@ a.tag:hover { border-color: var(--accent-ink); color: var(--accent-ink); }
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#uvod"><b>Ekosystém péče</b><span>2035</span></a>
+    <a class="brand" href="#uvod" aria-label="Ekosystém péče 2035, přehled"><b>Ekosystém péče</b><svg class="yr" viewBox="0 0 56 19" width="56" height="19" shape-rendering="crispEdges" aria-hidden="true"><g data-pillar="demografie" style="--d:0"><rect x="0" y="0" width="3" height="3"/><rect x="4" y="0" width="3" height="3"/><rect x="8" y="0" width="3" height="3"/><rect x="8" y="4" width="3" height="3"/><rect x="0" y="8" width="3" height="3"/><rect x="4" y="8" width="3" height="3"/><rect x="8" y="8" width="3" height="3"/><rect x="0" y="12" width="3" height="3"/><rect x="0" y="16" width="3" height="3"/><rect x="4" y="16" width="3" height="3"/><rect x="8" y="16" width="3" height="3"/></g><g data-pillar="pecujici" style="--d:1"><rect x="15" y="0" width="3" height="3"/><rect x="19" y="0" width="3" height="3"/><rect x="23" y="0" width="3" height="3"/><rect x="15" y="4" width="3" height="3"/><rect x="23" y="4" width="3" height="3"/><rect x="15" y="8" width="3" height="3"/><rect x="23" y="8" width="3" height="3"/><rect x="15" y="12" width="3" height="3"/><rect x="23" y="12" width="3" height="3"/><rect x="15" y="16" width="3" height="3"/><rect x="19" y="16" width="3" height="3"/><rect x="23" y="16" width="3" height="3"/></g><g data-pillar="finance" style="--d:2"><rect x="30" y="0" width="3" height="3"/><rect x="34" y="0" width="3" height="3"/><rect x="38" y="0" width="3" height="3"/><rect x="38" y="4" width="3" height="3"/><rect x="30" y="8" width="3" height="3"/><rect x="34" y="8" width="3" height="3"/><rect x="38" y="8" width="3" height="3"/><rect x="38" y="12" width="3" height="3"/><rect x="30" y="16" width="3" height="3"/><rect x="34" y="16" width="3" height="3"/><rect x="38" y="16" width="3" height="3"/></g><g data-pillar="obce" style="--d:3"><rect x="45" y="0" width="3" height="3"/><rect x="49" y="0" width="3" height="3"/><rect x="53" y="0" width="3" height="3"/><rect x="45" y="4" width="3" height="3"/><rect x="45" y="8" width="3" height="3"/><rect x="49" y="8" width="3" height="3"/><rect x="53" y="8" width="3" height="3"/><rect x="53" y="12" width="3" height="3"/><rect x="45" y="16" width="3" height="3"/><rect x="49" y="16" width="3" height="3"/><rect x="53" y="16" width="3" height="3"/></g></svg></a>
     <nav class="nav" aria-label="Hlavní navigace">
       <a href="#uvod" data-sec="uvod">Přehled</a>
       <a href="#bariery" data-sec="bariery">Bariéry a rizika</a>
@@ -1445,6 +1463,11 @@ function subPage(b, s) {
   ${kraje(s.id)}`;
 }
 
+// Square underline for the main nav, coloured from all four pillars (seeded per link)
+document.querySelectorAll(".nav a").forEach(a => {
+  const r = rng(hash("nav:" + a.dataset.sec)), pal = squarePalette(null);
+  a.insertAdjacentHTML("beforeend", `<span class="usq" aria-hidden="true">${Array.from({ length: 24 }, (_, i) => `<i style="--i:${i};background:${pick(r, pal)}"></i>`).join("")}</span>`);
+});
 const drawer = document.getElementById("drawer"), menuBtn = document.getElementById("menu-btn");
 function setMenu(open) {
   menuBtn.setAttribute("aria-expanded", String(open));
